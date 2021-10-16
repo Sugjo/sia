@@ -2,5 +2,5 @@
 
 >Документация Sia HomeWork V1.0.0 beta
 
-[GitHub](https://github.com/QingWei-Li/docsify/)
+[GitHub](https://github.com/sugjo/sia)
 [Начать](README.md)
