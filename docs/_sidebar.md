@@ -4,4 +4,4 @@
   * [Конфигурация](configuration.md)
 * Для диплома
   * [Диплом](diplom.home.md)
-  * [Диаграмы](diplom.diagrams.md)
+  * [Диаграммы](diplom.diagrams.md)
