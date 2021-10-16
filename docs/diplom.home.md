@@ -10,3 +10,29 @@
 ## Документы
 
 TODO
+
+## Sia HomeWork
+
+Цель:
+
+- сделать Open Source инструмент для менеджмента домашнего задания чтобы помочь школьникам и студентам
+
+Аналоги:
+
+- [Дневник.ру](https://dnevnik.ru/)
+- [Homework Manager](https://www.microsoft.com/ru-ru/p/homework-manager/9nblggh4ts9x?activetab=pivot:overviewtab)
+- [Homework Manager](https://play.google.com/store/apps/details?id=com.maristak.asir&hl=ru&gl=US)
+
+Для кого:
+
+- Для студентов и школьников
+
+Технологии:
+
+- node js
+- react js
+- express
+- react native
+- electron
+
+---
