@@ -1,11 +1,11 @@
-# Диплом
+# Диплом {docsify-ignore-all}
 
 >Вся важная информация для диплома
 
 ## Ссылки
 
 - [Trello](https://trello.com/b/BiilemhJ/%D0%B4%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC)
-- [Диограммы](diplom.diograms.md)
+- [Диограммы](diplom.diagrams.md)
 
 ## Документы
 
@@ -29,10 +29,10 @@ TODO
 
 Технологии:
 
-- node js
-- react js
-- express
-- react native
-- electron
+- [Node.js](https://nodejs.org/en/)
+- [React](https://reactjs.org/)
+- [Express](https://expressjs.com/)
+- [React Native](https://reactnative.dev/)
+- [Electron](https://www.electronjs.org/)
 
 ---
