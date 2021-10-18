@@ -2,7 +2,7 @@
 
 ## Use case
 
-![IDF0](../_media/diagrams/use_case.svg)
+![IDF0](_media/diagrams/use_case.svg)
 
 ## Deployment
 
@@ -34,7 +34,7 @@
 
 ## IDF0
 
-![IDF0](../_media/diagrams/idef0.svg)
+![IDF0](_media/diagrams/idef0.svg)
 
 ## DFD
 
