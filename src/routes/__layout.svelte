@@ -1,6 +1,19 @@
-<nav>
-	<a href="/">Главная</a>
-	<a href="/test">test</a>
-</nav>
+<script>
+	import Header from '../components/Header.svelte';
+	import ThemeSwitsh from '../components/ThemeSwitsh.svelte';
 
-<slot/>
+	function switchMedia() {
+		
+	}
+</script>
+
+<Header />
+
+<main>
+	<slot />
+</main>
+
+<ThemeSwitsh></ThemeSwitsh>
+
+<style>
+</style>
