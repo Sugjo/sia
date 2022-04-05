@@ -1,35 +1,28 @@
 <script>
-	let setTheme;
-	let theme = {
-		light: '(prefers-color-scheme: light)',
-		dark: '(prefers-color-scheme: dark)'
-	};
+	import { getContext } from 'svelte';
+	const settings = getContext('settings');
+	let darkCss;
+	let lightCss;
 
-	$: switch (setTheme) {
+	$: switch ($settings.theme) {
 		case 'light':
-			theme.dark = 'not-all';
-			theme.light = 'all';
+			darkCss = 'not-all';
+			lightCss = 'all';
 			break;
 		case 'auto':
-			theme.dark = '(prefers-color-scheme: dark)';
-			theme.light = '(prefers-color-scheme: light)';
+			darkCss = '(prefers-color-scheme: dark)';
+			lightCss = '(prefers-color-scheme: light)';
 			break;
 		case 'dark':
-			theme.dark = 'all';
-			theme.light = 'not-all';
+			darkCss = 'all';
+			lightCss = 'not-all';
 			break;
 	}
 </script>
 
 <svelte:head>
-	<link rel="stylesheet" href="/theme/light.css" media={theme.ligth} />
-	<link rel="stylesheet" href="/theme/dark.css" media={theme.dark} />
+	<link rel="stylesheet" href="/theme/light.css" media={lightCss} />
+	<link rel="stylesheet" href="/theme/dark.css" media={darkCss} />
 </svelte:head>
-
-<select bind:value={setTheme}>
-	<option value="light">Светлая</option>
-	<option value="dark">Тёмная</option>
-	<option value="auto">Системная</option>
-</select>
 
 <!-- <button on:click={changeThemeHandler}>{themeIsLight ? '🌚' : '🌞'}</button> -->

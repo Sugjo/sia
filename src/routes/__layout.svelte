@@ -1,10 +1,11 @@
 <script>
 	import Header from '../components/Header.svelte';
 	import ThemeSwitsh from '../components/ThemeSwitsh.svelte';
+	import ThemeSwitchButton from '../components/ThemeSwitchButton.svelte';
+    import { settings } from "../store/settings.store";
+	import { setContext } from 'svelte';
 
-	function switchMedia() {
-		
-	}
+	setContext('settings', settings);
 </script>
 
 <Header />
@@ -13,7 +14,9 @@
 	<slot />
 </main>
 
-<ThemeSwitsh></ThemeSwitsh>
+<ThemeSwitsh />
+
+<ThemeSwitchButton />
 
 <style>
 </style>

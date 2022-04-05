@@ -9,7 +9,6 @@
 	header {
 		position: sticky;
 		top: 0;
-		width: 100%;
 		padding: 1rem;
 
 		background: var(--second-color);

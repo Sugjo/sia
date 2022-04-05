@@ -22,8 +22,16 @@
 </script>
 
 <script>
+	import { getContext } from 'svelte';
+
 	export let article;
-	console.log(article);
+	
+	const settings = getContext("settings")
+
 </script>
 
-<h1>home</h1>
+{$settings.theme}
+
+<h1 style="color: {article.completed ? "limegreen" : "maroon"} ;">{article.title}</h1>
+
+<a href="{article.id + 1}">Next</a>
