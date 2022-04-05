@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	display: grid;
 	grid-template-rows: min-content 1fr;
+	background: black;
 	background: var(--body-color);
 	color: var(--text-color);
 }

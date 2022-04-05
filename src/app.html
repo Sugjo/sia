@@ -5,10 +5,21 @@
 		<meta name="description" content="" />
 		<link rel="icon" href="%svelte.assets%/favicon.png" />
 		<link rel="stylesheet" href="/theme/app.css">
+		<link rel="manifest" href="%svelte.assets%/manifest.json">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%svelte.head%
 	</head>
 	<body>
 		<div>%svelte.body%</div>
 	</body>
+
+	<script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js").then((reg) => {
+            console.log("Service worker registered.", reg);
+          });
+        });
+      }
+    </script>
 </html>
