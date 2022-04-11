@@ -9,15 +9,16 @@
 	header {
 		position: sticky;
 		top: 0;
-		padding: 1rem;
+		padding: 1.5rem;
 
-		background: var(--second-color);
+		background-color: var(--second-color);
 		-webkit-box-shadow: var(--app-shadow);
 		-moz-box-shadow: var(--app-shadow);
 		box-shadow: var(--app-shadow);
 
 		text-align: center;
 		color: var(--text-color);
+
 	}
 
 	img {

@@ -1,6 +1,7 @@
 <script>
-	import Header from '../components/Header.svelte';
-	import ThemeSwitsh from '../components/ThemeSwitsh.svelte';
+	import Header from '$lib/Header.svelte';
+	import Menu from '$lib/Menu.svelte';
+	import ThemeSwitsh from '$lib/ThemeSwitsh.svelte';
 	import { settings } from '../store/settings.store';
 	import { setContext } from 'svelte';
 
@@ -14,17 +15,7 @@
 	<ThemeSwitsh />
 </main>
 
+<Menu />
+
 <style>
-	:global(*) {
-		box-sizing: border-box;
-		font-family: 'Roboto', sans-serif;
-	}
-
-	:global(body) {
-		min-height: 100vh;
-	}
-
-	main {
-		width: 100%;
-	}
 </style>
