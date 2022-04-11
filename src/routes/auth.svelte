@@ -9,7 +9,7 @@
 
 	function signInWithGoogle() {
 		signInWithPopup(auth, provider)
-			.then((e) => ($app.user = e))
+			.then((e) => ($app.user = e.user))
 			.then(() => {
 				goto("/home")
 			});
