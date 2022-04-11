@@ -2,7 +2,7 @@
 </script>
 
 <header>
-	<img src="logo.svg" alt="Логотип сайта Sia HomeWork" />
+	<img src="/logo.svg" alt="Логотип сайта Sia HomeWork" />
 </header>
 
 <style>
