@@ -1,8 +1,7 @@
 <script>
 	import Header from '../components/Header.svelte';
 	import ThemeSwitsh from '../components/ThemeSwitsh.svelte';
-	import ThemeSwitchButton from '../components/ThemeSwitchButton.svelte';
-    import { settings } from "../store/settings.store";
+	import { settings } from '../store/settings.store';
 	import { setContext } from 'svelte';
 
 	setContext('settings', settings);
@@ -12,11 +11,20 @@
 
 <main>
 	<slot />
+	<ThemeSwitsh />
 </main>
 
-<ThemeSwitsh />
-
-<ThemeSwitchButton />
-
 <style>
+	:global(*) {
+		box-sizing: border-box;
+		font-family: 'Roboto', sans-serif;
+	}
+
+	:global(body) {
+		min-height: 100vh;
+	}
+
+	main {
+		width: 100%;
+	}
 </style>
