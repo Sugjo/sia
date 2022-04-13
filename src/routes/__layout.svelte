@@ -8,14 +8,25 @@
 	setContext('settings', settings);
 </script>
 
-<Header />
+<ThemeSwitsh />
 
+<Header />
 <main>
 	<slot />
-	<ThemeSwitsh />
 </main>
-
-<Menu />
+<Menu --header-height="78px" />
 
 <style>
+	main {
+		grid-area: main;
+	}
+
+	:global(body) {
+		grid-template-rows: min-content 1fr min-content;
+		grid-template-columns: 1fr 3fr 1fr;
+		grid-template-areas:
+			'header header header'
+			'. main .'
+			'aside aside aside';
+	}
 </style>

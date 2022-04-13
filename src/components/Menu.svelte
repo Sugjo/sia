@@ -4,6 +4,8 @@
 
 <style>
     aside {
+		grid-area: aside;
+
         position: sticky;
         bottom: 0;
         left: 0;

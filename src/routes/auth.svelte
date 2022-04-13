@@ -11,11 +11,11 @@
 		signInWithPopup(auth, provider)
 			.then((e) => ($app.user = e.user))
 			.then(() => {
-				goto("/home")
+				goto('/home');
 			});
 	}
 
-	if ($app.user) goto("/")
+	if ($app.user) goto('/');
 </script>
 
 <svelte:head>

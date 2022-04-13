@@ -7,6 +7,8 @@
 
 <style>
 	header {
+		grid-area: header;
+		
 		position: sticky;
 		top: 0;
 		padding: 1.5rem;
@@ -18,7 +20,6 @@
 
 		text-align: center;
 		color: var(--text-color);
-
 	}
 
 	img {
