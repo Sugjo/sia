@@ -2,23 +2,14 @@
 	import Header from '$lib/Header.svelte';
 	import Menu from '$lib/Menu.svelte';
 	import ThemeSwitsh from '$lib/ThemeSwitsh.svelte';
-	import { settings } from '../store/settings.store';
-	import { onMount, setContext } from 'svelte';
-
-	setContext('settings', settings);
+	import { onMount } from 'svelte';
 
 	let width;
 
-	function resizeHandler() {
-		width = window.innerWidth
-	}
-
-	onMount(() => {
-		resizeHandler();
-	});
+	onMount(() => resizeHandler());
+	const resizeHandler = () => width = window.innerWidth
 </script>
 
-<svelte:window on:resize={resizeHandler} />
 
 <ThemeSwitsh />
 
@@ -28,6 +19,7 @@
 	<slot />
 </main>
 
+<svelte:window on:resize={resizeHandler} />
 <Menu type={width >= 800 ? 'desktop' : 'mobile'} />
 
 <style>
