@@ -1,8 +1,9 @@
 <script>
 	export let type = 'desktop';
+	export let href
 </script>
 
-<a href="##" class={type == 'desktop'? "desktop" : ""}>
+<a {href} class={type == 'desktop'? "desktop" : ""}>
 	{#if type == 'desktop'}
 		<div class="icon"><slot name="icon" /></div>
 		<div class="title"><slot name="title" /></div>

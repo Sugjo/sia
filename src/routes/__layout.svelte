@@ -5,14 +5,27 @@
 	import { settings } from '../store/settings.store';
 	import { onMount } from 'svelte';
 	import { setContext } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
+	import { app } from '../store/app.store';
+	import { goto } from '$app/navigation';
+
+	setContext('settings', settings);
+	setContext('app', app);
+
+	afterNavigate(() => {
+		if (!$app.loggedIn) {
+			goto('/login');
+		}
+	});
 
 	let width;
-	setContext('settings', settings);
+	$: type = width >= 800 ? 'desktop' : 'mobile'
 
 	onMount(() => resizeHandler());
-	const resizeHandler = () => width = window.innerWidth
+	const resizeHandler = () => (width = window.innerWidth);
 </script>
 
+<svelte:window on:resize={resizeHandler} />
 
 <ThemeSwitsh />
 
@@ -22,8 +35,8 @@
 	<slot />
 </main>
 
-<svelte:window on:resize={resizeHandler} />
-<Menu type={width >= 800 ? 'desktop' : 'mobile'} />
+
+<Menu {type} />
 
 <style>
 	main {

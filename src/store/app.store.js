@@ -1,6 +1,10 @@
 import { writable } from 'svelte-local-storage-store';
 
-export const app = writable('app', {
-	user: null,
-    homepage: "/home",
-});
+const appData = {
+	loggedIn: false,
+	homepage: '/home'
+};
+
+export const app = writable('app', appData);
+
+export const appToDefault = () => app.set(appData)

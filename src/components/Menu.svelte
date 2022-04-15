@@ -6,28 +6,32 @@
 	let menuElements = [
 		{
 			title: 'Задания',
-			icon: 'checklist'
+			icon: 'checklist',
+			href: '/'
 		},
 
 		{
 			title: 'Чат',
-			icon: 'chat_bubble_outline'
+			icon: 'chat_bubble_outline',
+			href: '/chat'
 		},
 
 		{
 			title: 'Аккаунт',
-			icon: 'account_circle'
+			icon: 'account_circle',
+			href: '/account'
 		},
 		{
 			title: 'Настройки',
-			icon: 'settings'
+			icon: 'settings',
+			href: '/settings'
 		}
 	];
 </script>
 
 <aside class={type == 'desktop' ? '' : 'mobile'}>
 	{#each menuElements as element}
-		<MenuItem {type}>
+		<MenuItem {type} href={element.href}>
 			<span slot="title">{element.title}</span>
 			<span class="material-icons" slot="icon"> {element.icon} </span>
 		</MenuItem>
