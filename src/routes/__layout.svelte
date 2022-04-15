@@ -2,9 +2,12 @@
 	import Header from '$lib/Header.svelte';
 	import Menu from '$lib/Menu.svelte';
 	import ThemeSwitsh from '$lib/ThemeSwitsh.svelte';
+	import { settings } from '../store/settings.store';
 	import { onMount } from 'svelte';
+	import { setContext } from 'svelte';
 
 	let width;
+	setContext('settings', settings);
 
 	onMount(() => resizeHandler());
 	const resizeHandler = () => width = window.innerWidth

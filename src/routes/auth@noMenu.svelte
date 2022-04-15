@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from 'svelte';
-	import { auth, provider } from '$lib/firebase';
+	import { auth, provider } from '$lib/auth/firebase';
 	import { signInWithPopup } from 'firebase/auth';
 	import { app } from '../store/app.store';
 	import { goto } from '$app/navigation';
