@@ -8,18 +8,20 @@
 	import { afterNavigate } from '$app/navigation';
 	import { app } from '../store/app.store';
 	import { goto } from '$app/navigation';
+	import { onAuthStateChanged } from 'firebase/auth';
+	import { auth } from '$lib/auth/firebase';
 
 	setContext('settings', settings);
 	setContext('app', app);
 
-	afterNavigate(() => {
-		if (!$app.loggedIn) {
-			goto('/login');
-		}
+	onMount(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (!user) goto('/login');
+		});
 	});
 
 	let width;
-	$: type = width >= 800 ? 'desktop' : 'mobile'
+	$: type = width >= 800 ? 'desktop' : 'mobile';
 
 	onMount(() => resizeHandler());
 	const resizeHandler = () => (width = window.innerWidth);
@@ -34,7 +36,6 @@
 <main>
 	<slot />
 </main>
-
 
 <Menu {type} />
 
