@@ -4,3 +4,4 @@
 
 	afterNavigate(() => goto($app.homepage))
 </script>
+

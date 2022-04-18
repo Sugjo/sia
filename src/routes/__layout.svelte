@@ -5,16 +5,15 @@
 	import { settings } from '../store/settings.store';
 	import { onMount } from 'svelte';
 	import { setContext } from 'svelte';
-	import { afterNavigate } from '$app/navigation';
 	import { app } from '../store/app.store';
-	import { goto } from '$app/navigation';
+	import { afterNavigate, goto } from '$app/navigation';
 	import { onAuthStateChanged } from 'firebase/auth';
 	import { auth } from '$lib/auth/firebase';
 
 	setContext('settings', settings);
 	setContext('app', app);
 
-	onMount(() => {
+	afterNavigate(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (!user) goto('/login');
 		});

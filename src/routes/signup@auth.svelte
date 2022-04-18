@@ -1,5 +1,6 @@
 <script>
 	import GoogleAuth from '$lib/auth/GoogleAuth.svelte';
+	import Error from '$lib/Error.svelte';
 	import { register } from '$lib/auth/auth';
 
 	let email;
@@ -29,9 +30,9 @@
 		required
 		bind:value={email}
 	/>
-	{#if error?.type == 'email'}
-		<span class="error-message">{error.message}</span>
-	{/if}
+	<Error error forInput="email"/>
+
+
 	<label for="password">Пароль</label>
 	<input
 		type="password"
@@ -42,14 +43,12 @@
 		required
 		bind:value={password}
 	/>
-	{#if error?.type == 'password'}
-		<span class="error-message">{error.message}</span>
-	{/if}
+	<Error error forInput="password"/>
+
 	<button class="next" type="submit"> Зарегистрироваться </button>
 
-	{#if error?.type == 'other'}
-		<span class="error-message">{error.message}</span>
-	{/if}
+	<Error error forInput="other"/>
+
 </form>
 
 <p>Есть аккаунт? <a href="/login">Войти</a></p>
@@ -118,10 +117,5 @@
 
 	.error::placeholder {
 		color: #f93333;
-	}
-
-	.error-message {
-		color: #f93333;
-		margin-bottom: 1rem;
 	}
 </style>

@@ -6,14 +6,21 @@
 	const submitHandler = async () => (error = await passwordReset(email));
 </script>
 
-<h1>Sia HomeWork</h1>
-<h2>Востановление пароля</h2>
+<h1>Востановление пароля Sia HomeWork 🔏</h1>
+<h2>Пристанище ваших домашних заданй</h2>
 
 <form class="email" on:submit|preventDefault={submitHandler}>
 	<label for="email">Email</label>
-	<input type="email" name="email" placeholder="Введите свой Email" bind:value={email} required />
-	{#if error?.type == 'email'}
-		<small class="error-message">{error.message}</small>
+	<input
+		type="email"
+		name="email"
+		class:error
+		placeholder="Введите свой Email"
+		bind:value={email}
+		required
+	/>
+	{#if error}
+		<small class="error-message">{error}</small>
 	{/if}
 	<button class="next" type="submit"> Востановить </button>
 </form>
@@ -47,7 +54,7 @@
 		color: #575757;
 	}
 
-	.email input,
+	input,
 	button {
 		height: 40px;
 
@@ -73,6 +80,17 @@
 		text-align: center;
 		text-decoration: none;
 	}
+
+	.error {
+		background-color: #ffe2e2;
+		border: 1px #f78a8a solid;
+		color: #f93333;
+	}
+
+	.error::placeholder {
+		color: #f93333;
+	}
+
 	.error-message {
 		color: #f93333;
 		margin-bottom: 1rem;
