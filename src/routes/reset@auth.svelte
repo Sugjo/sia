@@ -1,8 +1,9 @@
 <script>
-    import { passwordReset } from "$lib/auth/auth";
+	import { passwordReset } from '$lib/auth/auth';
 
-    let email
-    const submitHandler = () => passwordReset(email)
+	let email;
+	let error;
+	const submitHandler = async () => (error = await passwordReset(email));
 </script>
 
 <h1>Sia HomeWork</h1>
@@ -10,7 +11,10 @@
 
 <form class="email" on:submit|preventDefault={submitHandler}>
 	<label for="email">Email</label>
-	<input type="email" name="email" placeholder="Введите свой Email" bind:value={email} required/>
+	<input type="email" name="email" placeholder="Введите свой Email" bind:value={email} required />
+	{#if error?.type == 'email'}
+		<small class="error-message">{error.message}</small>
+	{/if}
 	<button class="next" type="submit"> Востановить </button>
 </form>
 
@@ -68,5 +72,9 @@
 		margin-top: 2rem;
 		text-align: center;
 		text-decoration: none;
+	}
+	.error-message {
+		color: #f93333;
+		margin-bottom: 1rem;
 	}
 </style>
