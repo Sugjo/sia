@@ -1,7 +1,7 @@
 <script>
 	import GoogleAuth from '$lib/auth/GoogleAuth.svelte';
-	import Error from '$lib/Error.svelte';
 	import { register } from '$lib/auth/auth';
+	import Input from '$lib/Input.svelte';
 
 	let email;
 	let password;
@@ -20,35 +20,27 @@
 <GoogleAuth />
 
 <form class="email" on:submit|preventDefault={submitHandler}>
-	<label for="email">Email</label>
-	<input
-		type="email"
+	<Input
+		label="Email"
 		name="email"
-		class:error={error?.type == 'email'}
-		class="input"
+		inputType="email"
 		placeholder="Введите свой Email"
-		required
+		{error}
 		bind:value={email}
-	/>
-	<Error error forInput="email"/>
-
-
-	<label for="password">Пароль</label>
-	<input
-		type="password"
-		name="password"
-		class:error={error?.type == 'password'}
-		class="input"
-		placeholder="Введите пароль"
 		required
-		bind:value={password}
 	/>
-	<Error error forInput="password"/>
+
+	<Input
+		label="Пароль"
+		name="password"
+		inputType="password"
+		placeholder="Введите пароль"
+		{error}
+		bind:value={password}
+		required
+	/>
 
 	<button class="next" type="submit"> Зарегистрироваться </button>
-
-	<Error error forInput="other"/>
-
 </form>
 
 <p>Есть аккаунт? <a href="/login">Войти</a></p>
@@ -78,12 +70,6 @@
 		flex-direction: column;
 	}
 
-	.email label {
-		font-size: 14px;
-		color: #575757;
-	}
-
-	.input,
 	button {
 		height: 40px;
 
@@ -107,15 +93,5 @@
 		opacity: 0.8;
 		margin-top: 2rem;
 		text-align: center;
-	}
-
-	.error {
-		background-color: #ffe2e2;
-		border: 1px #f78a8a solid;
-		color: #f93333;
-	}
-
-	.error::placeholder {
-		color: #f93333;
 	}
 </style>

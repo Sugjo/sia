@@ -44,12 +44,12 @@ export const register = async (email, password) => {
 		login(email, password);
 	} catch (error) {
 		if (error.code == 'auth/email-already-in-use')
-			return { forInput: 'email', message: 'Email уже используется' };
+			return { type: 'email', message: 'Email уже используется' };
 		if (error.code == 'auth/invalid-email')
-			return { forInput: 'email', message: 'Введите существующий Email' };
+			return { type: 'email', message: 'Введите существующий Email' };
 		if (error.code == 'auth/weak-password')
-			return { forInput: 'password', message: 'Пароль слишком простой' };
-		return { forInput: 'other', message: error.message };
+			return { type: 'password', message: 'Пароль слишком простой' };
+		return { type: 'other', message: error.message };
 	}
 };
 
@@ -69,9 +69,10 @@ export const googleAuth = async () => {
 	}
 };
 
-export const googleAuthHandler = () => {
+export const googleAuthHandler = async () => {
 	try {
-		getRedirectResult(auth);
+		const redirectResult = await getRedirectResult(auth);
+		if (!redirectResult) return;
 		app.update((e) => ({ ...e, loggedIn: true }));
 		goto(get(app).homepage || '/home');
 	} catch (error) {

@@ -1,11 +1,14 @@
 <script>
 	import GoogleAuth from '$lib/auth/GoogleAuth.svelte';
-    import { login } from "$lib/auth/auth";
+	import { login } from '$lib/auth/auth';
+	import Error from '$lib/Error.svelte';
+	import Input from '$lib/Input.svelte';
 
-	let email
-	let password
-	let error
-	const submitHandler = () => login(email, password).then((e) => error = e)
+	let email;
+	let password;
+	let error;
+
+	const submitHandler = () => login(email, password).then((e) => (error = e));
 </script>
 
 <svelte:head>
@@ -18,13 +21,28 @@
 <GoogleAuth />
 
 <form class="email" on:submit|preventDefault={submitHandler}>
-	<label for="email">Email</label>
-	<input type="email" name="email" placeholder="Введите свой Email" required bind:value={email}/>
-	<label for="password">Пароль</label>
-	<input type="password" name="password" placeholder="Введите пароль" required bind:value={password}/>
-	{#if error}
+	<Input
+		label="Email"
+		name="email"
+		inputType="email"
+		placeholder="Введите свой Email"
 		{error}
-	{/if}
+		bind:value={email}
+		required
+	/>
+
+	<Input
+		label="Пароль"
+		name="password"
+		inputType="password"
+		placeholder="Введите пароль"
+		{error}
+		bind:value={email}
+		required
+	/>
+
+	<Error {error} name="other" />
+
 	<button class="next" type="submit"> Войти </button>
 </form>
 <a class="forgotten-password" href="/reset">Забыли пароль?</a>
@@ -56,12 +74,6 @@
 		flex-direction: column;
 	}
 
-	.email label {
-		font-size: 14px;
-		color: #575757;
-	}
-
-	.email input,
 	button {
 		height: 40px;
 

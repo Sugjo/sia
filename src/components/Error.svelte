@@ -1,9 +1,9 @@
 <script>
 	export let error;
-    export let forInput;
+    export let name;
 </script>
 
-{#if error?.forInput == forInput}
+{#if error?.type == name}
 	<span class="error-message">{error.message}</span>
 {/if}
 

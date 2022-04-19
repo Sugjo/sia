@@ -1,5 +1,6 @@
 <script>
 	import { passwordReset } from '$lib/auth/auth';
+	import Input from '$lib/Input.svelte';
 
 	let email;
 	let error;
@@ -10,18 +11,15 @@
 <h2>Пристанище ваших домашних заданй</h2>
 
 <form class="email" on:submit|preventDefault={submitHandler}>
-	<label for="email">Email</label>
-	<input
-		type="email"
+	<Input
+		label="Email"
 		name="email"
-		class:error
+		inputType="email"
 		placeholder="Введите свой Email"
+		{error}
 		bind:value={email}
 		required
 	/>
-	{#if error}
-		<small class="error-message">{error}</small>
-	{/if}
 	<button class="next" type="submit"> Востановить </button>
 </form>
 
@@ -49,12 +47,6 @@
 		flex-direction: column;
 	}
 
-	.email label {
-		font-size: 14px;
-		color: #575757;
-	}
-
-	input,
 	button {
 		height: 40px;
 
@@ -79,20 +71,5 @@
 		margin-top: 2rem;
 		text-align: center;
 		text-decoration: none;
-	}
-
-	.error {
-		background-color: #ffe2e2;
-		border: 1px #f78a8a solid;
-		color: #f93333;
-	}
-
-	.error::placeholder {
-		color: #f93333;
-	}
-
-	.error-message {
-		color: #f93333;
-		margin-bottom: 1rem;
 	}
 </style>

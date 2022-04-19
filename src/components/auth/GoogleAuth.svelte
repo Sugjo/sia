@@ -1,20 +1,21 @@
 <script>
-import { beforeNavigate } from '$app/navigation';
-
 	import { googleAuth, googleAuthHandler } from '$lib/auth/auth';
+	import { onMount } from 'svelte';
 
 	let error;
 
-	beforeNavigate(() => {
-		error = googleAuthHandler()
-	})
+	let auth;
+
+	onMount(() => {
+		auth = googleAuthHandler();
+	});
 </script>
 
 <button class="button-google" on:click={googleAuth}>
 	<img src="/img/google.png" alt="" width="15" height="15" /> Продолжить с помощю Google
 </button>
 {#if error}
-<span class="error-message">{error.message}</span>
+	<span class="error-message">{error.message}</span>
 {/if}
 <div class="or">или</div>
 
@@ -27,7 +28,7 @@ import { beforeNavigate } from '$app/navigation';
 
 		padding: 0.5rem;
 
-        cursor: pointer;
+		cursor: pointer;
 	}
 
 	.button-google {
