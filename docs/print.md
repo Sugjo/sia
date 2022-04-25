@@ -1,1 +1,0 @@
-<a href="./диплом/diplom_Akhmadeev_Ilya_9ISP-42-18.docx">Диплом пояснительная записка</a>

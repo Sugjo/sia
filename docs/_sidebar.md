@@ -5,4 +5,3 @@
 * Для диплома
   * [Диплом](diplom.home.md)
   * [Диаграммы](diplom.diagrams.md)
-* [На печать](print.md)
