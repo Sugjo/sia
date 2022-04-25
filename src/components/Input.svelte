@@ -27,7 +27,7 @@
 	{/if}
 	<input
 		id={eltId}
-		class:error={error?.type == name}
+		class:error={error?.type == name && error?.message}
 		class="input"
 		{placeholder}
 		{required}

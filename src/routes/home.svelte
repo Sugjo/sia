@@ -1,21 +1,26 @@
 <script>
 	import Input from '$lib/Input.svelte';
 
-	let eamil;
-	let error;
+	let email;
+	let error = {
+		type: 'email',
+		message: "adsdsad"
+	};
 </script>
 
 <section>
 	<h1>Home</h1>
-	<input type="text" bind:value={error} />
+	<input type="text" bind:value={error.message} />
 
 	<Input
-		{error}
-		inputType="email"
-		bind:value={eamil}
-		placeholder="Ваш Email"
 		label="Email"
+		name="email"
+		inputType="email"
+		placeholder="Введите свой Email"
+		{error}
+		bind:value={email}
+		required
 	/>
 
-	{eamil}
+	{email}
 </section>
