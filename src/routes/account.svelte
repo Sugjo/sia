@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from 'svelte';
-    import { logout } from "$lib/auth/auth";
+    import { logout } from "$lib/user/auth/auth";
 
     const app = getContext("app")
 

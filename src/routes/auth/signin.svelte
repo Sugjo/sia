@@ -1,14 +1,14 @@
 <script>
-	import GoogleAuth from '$lib/auth/GoogleAuth.svelte';
-	import { login } from '$lib/auth/auth';
-	import Error from '$lib/Error.svelte';
-	import Input from '$lib/Input.svelte';
+	import GoogleAuth from '$lib/user/auth/GoogleAuth.svelte';
+	import { login } from '$lib/user/auth/auth';
+	import Error from '$lib/generic/Error.svelte';
+	import Input from '$lib/generic/Input.svelte';
 
 	let email;
 	let password;
 	let error;
 
-	const submitHandler = () => login(email, password).then((e) => (error = e));
+	const submitHandler = async () => (error = await login(email, password));
 </script>
 
 <svelte:head>
@@ -37,7 +37,7 @@
 		inputType="password"
 		placeholder="Введите пароль"
 		{error}
-		bind:value={email}
+		bind:value={password}
 		required
 	/>
 
@@ -45,9 +45,9 @@
 
 	<button class="next" type="submit"> Войти </button>
 </form>
-<a class="forgotten-password" href="/reset">Забыли пароль?</a>
+<a class="forgotten-password" href="/auth/reset">Забыли пароль?</a>
 
-<p>Нет аккаунта? <a href="/signup">Зарегистрироваться</a></p>
+<p>Нет аккаунта? <a href="/auth/signup">Зарегистрироваться</a></p>
 
 <style>
 	h1,

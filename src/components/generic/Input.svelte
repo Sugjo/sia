@@ -4,7 +4,7 @@
 
 <script>
 	import { onMount } from 'svelte';
-	import Error from '$lib/Error.svelte';
+	import Error from '$lib/generic/Error.svelte';
 
 	export let inputType = 'text';
 	export let name = '';

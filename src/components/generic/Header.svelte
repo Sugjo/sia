@@ -11,7 +11,7 @@
 		
 		position: sticky;
 		top: 0;
-		padding: 1.5rem;
+		padding: 1rem;
 
 		background-color: var(--second-color);
 		-webkit-box-shadow: var(--app-shadow);

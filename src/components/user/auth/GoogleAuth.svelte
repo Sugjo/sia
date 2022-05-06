@@ -1,5 +1,5 @@
 <script>
-	import { googleAuth, googleAuthHandler } from '$lib/auth/auth';
+	import { googleAuth, googleAuthHandler } from '$lib/user/auth/auth';
 	import { onMount } from 'svelte';
 
 	let error;

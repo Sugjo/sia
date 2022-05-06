@@ -2,9 +2,13 @@
 	box-sizing: border-box;
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	margin: 0;
-	min-height: 100vh;
+	min-height: 100%;
 	display: grid;
 	background: black;
 	background: var(--body-color);
@@ -12,10 +16,18 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-main {
-	display: flex;
-	justify-content: center;
-	width: 100%;
 
-	padding: 30px;
+main {
+	width: 100%;
+	padding: 1rem;
+}
+
+.container {
+	background-color: var(--second-color);
+	-webkit-box-shadow: var(--app-shadow);
+	-moz-box-shadow: var(--app-shadow);
+	box-shadow: var(--app-shadow);
+
+	padding: 1rem;
+	border-radius: 5px;
 }

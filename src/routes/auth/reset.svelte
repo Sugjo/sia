@@ -1,23 +1,15 @@
 <script>
-	import GoogleAuth from '$lib/auth/GoogleAuth.svelte';
-	import { register } from '$lib/auth/auth';
-	import Input from '$lib/Input.svelte';
+	import { passwordReset } from '$lib/user/auth/auth';
+	import Input from '$lib/generic/Input.svelte';
+	import Error from '$lib/generic/Error.svelte';
 
 	let email;
-	let password;
 	let error;
-
-	const submitHandler = async () => (error = await register(email, password));
+	const submitHandler = async () => (error = await passwordReset(email));
 </script>
 
-<svelte:head>
-	<title>Добро пожаловать | Sia HomeWork</title>
-</svelte:head>
-
-<h1>Добро пожаловать в Sia HomeWork 👋</h1>
+<h1>Востановление пароля Sia HomeWork 🔏</h1>
 <h2>Пристанище ваших домашних заданй</h2>
-
-<GoogleAuth />
 
 <form class="email" on:submit|preventDefault={submitHandler}>
 	<Input
@@ -30,20 +22,11 @@
 		required
 	/>
 
-	<Input
-		label="Пароль"
-		name="password"
-		inputType="password"
-		placeholder="Введите пароль"
-		{error}
-		bind:value={password}
-		required
-	/>
-
-	<button class="next" type="submit"> Зарегистрироваться </button>
+	<Error name="other" {error} />
+	<button class="next" type="submit"> Востановить </button>
 </form>
 
-<p>Есть аккаунт? <a href="/login">Войти</a></p>
+<a href="/auth/signin">Назад</a>
 
 <style>
 	h1,
@@ -62,9 +45,6 @@
 		margin-bottom: 2rem;
 	}
 
-	a {
-		text-decoration: none;
-	}
 	.email {
 		display: flex;
 		flex-direction: column;
@@ -73,7 +53,7 @@
 	button {
 		height: 40px;
 
-		background-color: #ffffff;
+		background: #ffffff;
 		border: 1px solid #d0d0d0;
 		border-radius: 5px;
 
@@ -89,9 +69,10 @@
 		border-radius: 5px;
 	}
 
-	p {
+	a {
 		opacity: 0.8;
 		margin-top: 2rem;
 		text-align: center;
+		text-decoration: none;
 	}
 </style>

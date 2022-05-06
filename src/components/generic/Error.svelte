@@ -4,7 +4,7 @@
 </script>
 
 {#if error?.type == name}
-	<span class="error-message">{error.message}</span>
+	<small class="error-message">{error.message}</small>
 {/if}
 
 <style>

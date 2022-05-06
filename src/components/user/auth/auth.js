@@ -1,15 +1,11 @@
-import { goto } from '$app/navigation';
-import { auth, provider } from './firebase';
-import { app, appToDefault } from '../../store/app.store';
-import { settings, settingsToDefault } from '../../store/settings.store';
-import { get } from 'svelte/store';
+import { auth, provider } from '../firebase';
+import { settings, settingsToDefault } from '../../../store/settings.store';
+import { userToDefault, user as userStore } from '../../../store/user.store';
 import {
 	sendPasswordResetEmail,
 	signInWithRedirect,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
-	getAuth,
-	onAuthStateChanged,
 	signOut,
 	getRedirectResult
 } from 'firebase/auth';
@@ -17,23 +13,21 @@ import {
 export const login = async (email, password) => {
 	try {
 		await signInWithEmailAndPassword(auth, email, password);
-		app.update((e) => ({ ...e, loggedIn: true }));
 		//TODO: загрузка пользовательских настроек
-		goto(get(app).homepage || '/home');
 	} catch (error) {
-		return error;
+		return { type: 'other', message: error.message };
 	}
 };
 
 export const passwordReset = async (email) => {
-	//✔
 	try {
 		await sendPasswordResetEmail(auth, email);
-		goto('/login');
 	} catch (error) {
-		if (error.code == 'auth/invalid-email') return 'Введите существующий Email';
-		if (error.code == 'auth/user-not-found') return 'Пользователь не найден';
-		return error.message;
+		if (error.code == 'auth/invalid-email')
+			return { type: 'email', message: 'Введите существующий Email' };
+		if (error.code == 'auth/user-not-found')
+			return { type: 'email', message: 'Пользователь не найден' };
+		return { type: 'other', message: error.message };
 	}
 };
 
@@ -56,16 +50,15 @@ export const register = async (email, password) => {
 export const logout = () => {
 	//✔
 	signOut(auth);
-	appToDefault();
 	settingsToDefault();
-	goto('/login');
+	userToDefault();
 };
 
 export const googleAuth = async () => {
 	try {
 		await signInWithRedirect(auth, provider);
 	} catch (error) {
-		console.error(error);
+		return { type: 'other', message: error.message };
 	}
 };
 
@@ -73,15 +66,10 @@ export const googleAuthHandler = async () => {
 	try {
 		const redirectResult = await getRedirectResult(auth);
 		if (!redirectResult) return;
-		app.update((e) => ({ ...e, loggedIn: true }));
-		goto(get(app).homepage || '/home');
+		userStore.update((user) => (user = { ...user, uid: redirectResult.user.uid }));
 	} catch (error) {
 		if (error.code == 'auth/account-exists-with-different-credential')
 			return 'TODO: https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#signinwithpopup';
-		if (error.code == 'auth/cancelled-popup-request')
-			return 'Одновременно допускается только один запрос всплывающего окна';
-		if (error.code == 'auth/popup-blocked') return 'Всплывающее окно было заблокировано браузером';
-		if (error.code == 'auth/popup-closed-by-user') return 'Всплывающее окно закрыто пользователем';
-		return error.message;
+		return { type: 'other', message: error.message };
 	}
 };

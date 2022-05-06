@@ -1,15 +1,14 @@
 <script>
-	import Input from '$lib/Input.svelte';
+	import Input from '$lib/generic/Input.svelte';
 
 	let email;
 	let error = {
 		type: 'email',
-		message: "adsdsad"
+		message: 'adsdsad'
 	};
 </script>
 
 <section>
-	<h1>Home</h1>
 	<input type="text" bind:value={error.message} />
 
 	<Input

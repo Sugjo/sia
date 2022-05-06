@@ -1,10 +1,10 @@
 <script>
-	import { getContext } from 'svelte';
-	const settings = getContext('settings');
+	export let theme;
+
 	let darkCss;
 	let lightCss;
 
-	$: switch ($settings.theme) {
+	$: switch (theme) {
 		case 'light':
 			darkCss = 'not-all';
 			lightCss = 'all';
@@ -25,4 +25,4 @@
 	<link rel="stylesheet" href="/theme/dark.css" media={darkCss} />
 </svelte:head>
 
-<!-- <button on:click={changeThemeHandler}>{themeIsLight ? '🌚' : '🌞'}</button> -->
+<slot />
