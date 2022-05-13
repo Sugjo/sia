@@ -1,14 +1,16 @@
 <script>
-	import { passwordReset } from '$lib/user/auth/auth';
+	import Button from '$lib/generic/Button.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import Error from '$lib/generic/Error.svelte';
+	import { passwordReset } from '$lib/user/auth/auth';
+
 
 	let email;
 	let error;
 	const submitHandler = async () => (error = await passwordReset(email));
 </script>
 
-<h1>Востановление пароля Sia HomeWork 🔏</h1>
+<h1>Востановление пароля 🔏 <br> Sia HomeWork </h1>
 <h2>Пристанище ваших домашних заданй</h2>
 
 <form class="email" on:submit|preventDefault={submitHandler}>
@@ -23,7 +25,7 @@
 	/>
 
 	<Error name="other" {error} />
-	<button class="next" type="submit"> Востановить </button>
+	<Button type="submit"> Востановить </Button>
 </form>
 
 <a href="/auth/signin">Назад</a>
@@ -50,23 +52,10 @@
 		flex-direction: column;
 	}
 
-	button {
-		height: 40px;
-
-		background: #ffffff;
-		border: 1px solid #d0d0d0;
-		border-radius: 5px;
-
-		padding: 10px;
-
-		margin: 0.5rem 0;
-	}
-
-	.next {
-		background: rgba(255, 155, 155, 0.29);
-		color: #f93333;
-		border: 1px solid #f78a8a;
-		border-radius: 5px;
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 
 	a {

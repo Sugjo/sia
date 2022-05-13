@@ -1,7 +1,7 @@
 <script>
-	import { afterNavigate, goto } from '$app/navigation';
+	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
 	import { settings } from '../store/settings.store';
 
-	afterNavigate(() => goto($settings.homepage))
+	if (browser) goto($settings.homepage || '/home');
 </script>
-

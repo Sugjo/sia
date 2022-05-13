@@ -9,7 +9,7 @@
 	export let inputType = 'text';
 	export let name = '';
 	export let error;
-	export let label;
+	export let label = '';
 	export let value = '';
 	export let placeholder = '';
 	export let required = false;
@@ -62,12 +62,16 @@
 		border-radius: 5px;
 
 		padding: 10px;
+	}
 
-		margin: 0.5rem 0;
+	input:focus {
+		outline: none;
+		box-shadow: 0 0 0 4px #0000002f;
 	}
 
 	label {
 		font-size: 14px;
 		color: #575757;
+		margin-bottom: 0.5rem;
 	}
 </style>

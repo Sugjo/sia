@@ -1,7 +1,8 @@
 <script>
 	import GoogleAuth from '$lib/user/auth/GoogleAuth.svelte';
-	import { register } from '$lib/user/auth/auth';
+	import Button from '$lib/generic/Button.svelte';
 	import Input from '$lib/generic/Input.svelte';
+	import { register } from '$lib/user/auth/auth';
 
 	let email;
 	let password;
@@ -14,7 +15,7 @@
 	<title>Добро пожаловать | Sia HomeWork</title>
 </svelte:head>
 
-<h1>Добро пожаловать в Sia HomeWork 👋</h1>
+<h1>Добро пожаловать в Sia HomeWork 👋</h1>
 <h2>Пристанище ваших домашних заданй</h2>
 
 <GoogleAuth />
@@ -40,7 +41,7 @@
 		required
 	/>
 
-	<button class="next" type="submit"> Зарегистрироваться </button>
+	<Button type="submit">Зарегистрироваться</Button>
 </form>
 
 <p>Есть аккаунт? <a href="/auth/signin">Войти</a></p>
@@ -70,23 +71,10 @@
 		flex-direction: column;
 	}
 
-	button {
-		height: 40px;
-
-		background-color: #ffffff;
-		border: 1px solid #d0d0d0;
-		border-radius: 5px;
-
-		padding: 10px;
-
-		margin: 0.5rem 0;
-	}
-
-	.next {
-		background: rgba(255, 155, 155, 0.29);
-		color: #f93333;
-		border: 1px solid #f78a8a;
-		border-radius: 5px;
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 
 	p {

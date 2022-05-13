@@ -6,3 +6,8 @@
     --invert: 1;
 }
 
+.primary {
+	--background: brown;
+    --background-hover: rgb(180, 59, 59);
+	--color: #fff;
+}

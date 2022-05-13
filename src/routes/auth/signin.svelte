@@ -3,6 +3,7 @@
 	import { login } from '$lib/user/auth/auth';
 	import Error from '$lib/generic/Error.svelte';
 	import Input from '$lib/generic/Input.svelte';
+	import Button from '$lib/generic/Button.svelte';
 
 	let email;
 	let password;
@@ -15,37 +16,39 @@
 	<title>С возвращением | Sia HomeWork</title>
 </svelte:head>
 
-<h1>С возвращением в Sia HomeWork 👋</h1>
+<h1>С возвращением в Sia HomeWork 👋</h1>
 <h2>Пристанище ваших домашних заданй</h2>
 
 <GoogleAuth />
 
-<form class="email" on:submit|preventDefault={submitHandler}>
-	<Input
-		label="Email"
-		name="email"
-		inputType="email"
-		placeholder="Введите свой Email"
-		{error}
-		bind:value={email}
-		required
-	/>
+<section>
+	<form class="email" on:submit|preventDefault={submitHandler}>
+		<Input
+			label="Email"
+			name="email"
+			inputType="email"
+			placeholder="Введите свой Email"
+			{error}
+			bind:value={email}
+			required
+		/>
 
-	<Input
-		label="Пароль"
-		name="password"
-		inputType="password"
-		placeholder="Введите пароль"
-		{error}
-		bind:value={password}
-		required
-	/>
+		<Input
+			label="Пароль"
+			name="password"
+			inputType="password"
+			placeholder="Введите пароль"
+			{error}
+			bind:value={password}
+			required
+		/>
 
-	<Error {error} name="other" />
+		<Error {error} name="other" />
 
-	<button class="next" type="submit"> Войти </button>
-</form>
-<a class="forgotten-password" href="/auth/reset">Забыли пароль?</a>
+		<Button type="submit">Войти</Button>
+	</form>
+	<a class="forgotten-password" href="/auth/reset">Забыли пароль?</a>
+</section>
 
 <p>Нет аккаунта? <a href="/auth/signup">Зарегистрироваться</a></p>
 
@@ -74,23 +77,10 @@
 		flex-direction: column;
 	}
 
-	button {
-		height: 40px;
-
-		background: #ffffff;
-		border: 1px solid #d0d0d0;
-		border-radius: 5px;
-
-		padding: 10px;
-
-		margin: 0.5rem 0;
-	}
-
-	.next {
-		background: rgba(255, 155, 155, 0.29);
-		color: #f93333;
-		border: 1px solid #f78a8a;
-		border-radius: 5px;
+	section, form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 
 	.forgotten-password {

@@ -7,7 +7,7 @@
 		{
 			title: 'Задания',
 			icon: 'checklist',
-			href: '/'
+			href: '/home'
 		},
 		{
 			title: 'Чат',
@@ -23,6 +23,11 @@
 			title: 'Настройки',
 			icon: 'settings',
 			href: '/settings'
+		},
+		{
+			title: 'Группы',
+			icon: 'group',
+			href: '/groups'
 		}
 	];
 </script>
@@ -39,6 +44,7 @@
 <style>
 	aside {
 		display: grid;
+		gap: 4px;
 		grid-template-rows: max-content;
 
 		grid-area: aside;

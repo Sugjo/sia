@@ -1,7 +1,13 @@
 :root {
-    --app-shadow: 0px 3px 30px -8px rgba(34, 60, 80, 0.3);
-    --body-color: #fff;
-    --second-color: #fff;
-    --text-color: #000;
-    --invert: 0;
+	--app-shadow: 0px 3px 30px -8px rgba(34, 60, 80, 0.3);
+	--body-color: #fff;
+	--second-color: #fff;
+	--text-color: #000;
+	--invert: 0;
+}
+
+.primary {
+	--background: brown;
+    --background-hover: rgb(180, 59, 59);
+	--color: #fff;
 }

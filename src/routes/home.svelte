@@ -1,5 +1,6 @@
 <script>
 	import Input from '$lib/generic/Input.svelte';
+	import Button from "$lib/generic/Button.svelte";
 
 	let email;
 	let error = {
@@ -20,6 +21,9 @@
 		bind:value={email}
 		required
 	/>
+
+	<Button on:click icon="refresh">
+	</Button>
 
 	{email}
 </section>

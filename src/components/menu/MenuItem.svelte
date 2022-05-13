@@ -1,9 +1,12 @@
 <script>
+	import { page } from '$app/stores';
+
 	export let type = 'desktop';
 	export let href;
+	$: active = $page.routeId?.includes(href.replace('/', ''));
 </script>
 
-<a {href} class={type == 'desktop' ? 'desktop' : 'mobile'}>
+<a {href} class={type == 'desktop' ? 'desktop' : 'mobile'} class:active>
 	{#if type == 'desktop'}
 		<div class="icon"><slot name="icon" /></div>
 		<div class="title"><slot name="title" /></div>
@@ -20,6 +23,8 @@
 		text-decoration: none;
 		width: 100%;
 		height: 100%;
+
+		transition: 0.2s;
 	}
 
 	.desktop {
@@ -34,10 +39,15 @@
 	}
 
 	.icon {
-		color: brown;
+		transition: 0.2s;
+		color: rgb(138, 138, 138);
 		overflow: hidden;
 		height: 24px;
 		width: 24px;
+	}
+
+	.active .icon {
+		color: brown;
 	}
 
 	.title {
@@ -46,5 +56,11 @@
 
 	a:hover {
 		background-color: rgb(228, 228, 228);
+	}
+
+	a:focus {
+		background-color: rgb(228, 228, 228);
+		outline: none;
+		box-shadow: 0 0 0 4px #0000002f;
 	}
 </style>

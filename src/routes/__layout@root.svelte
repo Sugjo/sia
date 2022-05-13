@@ -13,11 +13,11 @@
 
 <svelte:window on:resize={resizeHandler} />
 
-<Header />
+<Menu {type} />
+
 <main>
 	<slot />
 </main>
-<Menu {type} />
 
 <style>
 	main {

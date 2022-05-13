@@ -1,12 +1,20 @@
 <script>
-	import { getContext } from 'svelte';
     import { logout } from "$lib/user/auth/auth";
-
-    const app = getContext("app")
+	import Button from "$lib/generic/Button.svelte";
 
 </script>
 
 <section>
-	<button on:click={logout}>Выйти</button>
-	<button>Удалить аккаунт</button>
+	<Button on:click={logout}>Выйти</Button>
+	<Button variant="dsdsd">Удалить аккаунт</Button>
 </section>
+
+<style>
+	section {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+	}
+</style>
