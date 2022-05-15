@@ -4,10 +4,18 @@
 	--second-color: #fff;
 	--text-color: #000;
 	--invert: 0;
+
+	--theme-background: brown;
+	--theme-background-hover: rgb(180, 59, 59);
+	--theme-background-second-hover: rgb(228, 228, 228);
+	--theme-background-body-hover: rgb(228, 228, 228);
+	--theme-color: #fff;
+	--theme-color-hover: #fff;
 }
 
-.primary {
-	--background: brown;
-    --background-hover: rgb(180, 59, 59);
-	--color: #fff;
+.hidden {
+	--theme-background: none;
+	--theme-background-hover: none;
+	--theme-color: rgb(160, 160, 160);
+	--theme-color-hover: rgb(197, 197, 197);
 }

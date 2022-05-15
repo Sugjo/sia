@@ -1,4 +1,4 @@
-<!-- <script context="module">
+<script context="module">
 	import { getGroups } from '$lib/user/groups/groups';
 
 	export async function load() {
@@ -12,14 +12,14 @@
 			}
 		};
 	}
-</script> -->
+</script>
 
 <script>
 	import { createGroup } from '$lib/user/groups/groups';
 	import Button from '$lib/generic/Button.svelte';
 	import GroupCard from '$lib/GroupCard.svelte';
 
-	export let userGroups;
+	export let groups;
 </script>
 
 <section>
@@ -28,7 +28,7 @@
 		<Button on:click={createGroup}>Создать группу</Button>
 	</div>
 	<div class="groups">
-		{#each userGroups as group}
+		{#each groups as group}
 			<GroupCard name={group.name} />
 		{/each}
 	</div>

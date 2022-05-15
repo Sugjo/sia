@@ -2,8 +2,8 @@ import { writable } from 'svelte-local-storage-store';
 
 const settingsData = {
 	theme: 'light',
-	homepage: '/home'
-}
+	homepage: '/todo'
+};
 
 export const settings = writable('settings', settingsData);
 

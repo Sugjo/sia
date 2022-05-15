@@ -7,7 +7,7 @@
 		{
 			title: 'Задания',
 			icon: 'checklist',
-			href: '/home'
+			href: '/todo'
 		},
 		{
 			title: 'Чат',
@@ -19,15 +19,20 @@
 			icon: 'account_circle',
 			href: '/account'
 		},
-		{
-			title: 'Настройки',
-			icon: 'settings',
-			href: '/settings'
-		},
+		// {
+		// 	title: 'Настройки',
+		// 	icon: 'settings',
+		// 	href: '/settings'
+		// },
 		{
 			title: 'Группы',
 			icon: 'group',
 			href: '/groups'
+		},
+		{
+			title: 'Тесты',
+			icon: 'science',
+			href: '/test'
 		}
 	];
 </script>
@@ -57,8 +62,6 @@
 		bottom: 0;
 		left: 0;
 		text-align: center;
-
-		color: var(--text-color);
 	}
 
 	.desktop {

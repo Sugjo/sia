@@ -8,8 +8,10 @@
 	export let variant = 'primary';
 
 	const variants = {
-		primary: 'primary'
+		primary: 'primary',
+		hidden: 'hidden'
 	};
+
 </script>
 
 {#if href}
@@ -18,7 +20,9 @@
 			{#if icon}
 				<span class="material-icons{outlined ? '-outlined' : ''}">{icon}</span>
 			{/if}
-			<slot>Кнопка</slot>
+			{#if $$slots.default}
+				<span><slot /></span>
+			{/if}
 		</div>
 	</a>
 {:else}
@@ -27,7 +31,9 @@
 			{#if icon}
 				<span class="material-icons{outlined ? '-outlined' : ''}">{icon}</span>
 			{/if}
-			<slot>Кнопка</slot>
+			{#if $$slots.default}
+				<span><slot /></span>
+			{/if}
 		</div>
 	</button>
 {/if}
@@ -38,13 +44,11 @@
 		-webkit-appearance: none;
 		-moz-appearance: none;
 
-		background: var(--background);
-		color: var(--color);
+		background: var(--theme-background);
+		color: var(--theme-color);
 
 		display: flex;
 		justify-content: center;
-
-		min-width: 100px;
 
 		padding: 0.5rem;
 		border: none;
@@ -63,13 +67,17 @@
 		font-size: 17px;
 	}
 
-	button span {
+	.material-icons {
 		font-size: 20px;
-		margin-right: 0.5rem;
+	}
+
+	.button-body span:nth-child(2n) {
+		margin-left: 0.5rem;
 	}
 
 	button:hover {
-		background-color: var(--background-hover);
+		background-color: var(--theme-background-hover);
+		color: var(--theme-color-hover);
 	}
 
 	button:focus {

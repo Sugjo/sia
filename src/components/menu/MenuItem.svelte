@@ -54,12 +54,17 @@
 		color: var(--text-color);
 	}
 
-	a:hover {
-		background-color: rgb(228, 228, 228);
+	a.mobile:hover,
+	a.mobile:focus {
+		background-color: var(--theme-background-second-hover);
+	}
+
+	a.desktop:hover,
+	a.mobile:focus {
+		background-color: var(--theme-background-body-hover);
 	}
 
 	a:focus {
-		background-color: rgb(228, 228, 228);
 		outline: none;
 		box-shadow: 0 0 0 4px #0000002f;
 	}
