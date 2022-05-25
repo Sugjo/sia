@@ -4,6 +4,9 @@
 	import Loader from '$lib/layout/Loader.svelte';
 	import ThemeSwitsh from '$lib/layout/ThemeSwitsh.svelte';
 	import { settings } from '../store/settings.store';
+	import { setContext } from 'svelte';
+
+	setContext('settings', settings);
 </script>
 
 <ThemeSwitsh theme={$settings.theme}>

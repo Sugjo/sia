@@ -8,7 +8,25 @@
 	let password;
 	let error;
 
-	const submitHandler = async () => (error = await register(email, password));
+	const submitHandler = async () => {
+		try {
+			const res = await fetch('/auth/signup', {
+				method: 'POST',
+				body: JSON.stringify({
+					email,
+					password
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			if (res.ok) {
+			}
+		} catch (err) {
+			error = err;
+		}
+	};
 </script>
 
 <svelte:head>

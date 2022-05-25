@@ -2,13 +2,12 @@
 	import { googleAuth, googleAuthHandler } from '$lib/user/auth/auth';
 	import { onMount } from 'svelte';
 
-	let error;
-
-	let auth;
-
-	onMount(() => {
-		auth = googleAuthHandler();
+	onMount(async () => {
+		const sessionId = await fetch('/auth/google').then((e) => e.json());
+		console.log('sessionId: ', await sessionId);
 	});
+
+	let error;
 </script>
 
 <button class="button-google" on:click={googleAuth}>

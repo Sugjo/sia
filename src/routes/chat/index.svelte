@@ -17,9 +17,10 @@
 <script>
 	import { createGroup } from '$lib/user/groups/groups';
 	import Button from '$lib/generic/Button.svelte';
-	import ChatCard from '$lib/ChatCard.svelte';
+	import ChatCard from '$lib/cards/ChatCard.svelte';
 
 	export let groups;
+
 </script>
 
 <section>

@@ -1,21 +1,28 @@
 :root {
-	--app-shadow: 0px 3px 30px -8px rgba(34, 60, 80, 0.3);
+	--app-shadow: 0px 3px 30px -8px #223c504d;
 	--body-color: #fff;
 	--second-color: #fff;
 	--text-color: #000;
 	--invert: 0;
 
 	--theme-background: brown;
-	--theme-background-hover: rgb(180, 59, 59);
-	--theme-background-second-hover: rgb(228, 228, 228);
-	--theme-background-body-hover: rgb(228, 228, 228);
+	--theme-background-hover: #b43b3b;
+	--theme-background-second-hover: #e4e4e4;
+	--theme-background-body-hover: #e4e4e4;
 	--theme-color: #fff;
 	--theme-color-hover: #fff;
 }
 
-.hidden {
+.simple {
 	--theme-background: none;
 	--theme-background-hover: none;
-	--theme-color: rgb(160, 160, 160);
-	--theme-color-hover: rgb(197, 197, 197);
+	--theme-color: #000;
+	--theme-color-hover: #000;
+}
+
+.settings {
+	--theme-background: none;
+	--theme-background-hover: none;
+	--theme-color: #a52a2a;
+	--theme-color-hover: #b43b3b;
 }

@@ -1,3 +1,7 @@
+:root {
+	--text-muted: #dadada;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -16,7 +20,6 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-
 main {
 	width: 100%;
 	padding: 1rem;
@@ -30,4 +33,18 @@ main {
 
 	padding: 1rem;
 	border-radius: 5px;
+}
+
+.hidden {
+	--theme-background: none;
+	--theme-background-hover: none;
+	--theme-color: #a0a0a0;
+	--theme-color-hover: #c5c5c5;
+}
+
+.primary {
+	--theme-background: #be4343;
+	--theme-background-hover: #c25f5f;
+	--theme-color: #fff;
+	--theme-color-hover: #fff;
 }

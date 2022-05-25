@@ -17,19 +17,52 @@
 <script>
 	import { createGroup } from '$lib/user/groups/groups';
 	import Button from '$lib/generic/Button.svelte';
-	import GroupCard from '$lib/GroupCard.svelte';
+	import TodoCard from '$lib/cards/TodoCard.svelte';
+	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
+	import Hr from '$lib/generic/Hr.svelte';
 
 	export let groups;
+
+	const todoExample = [
+		{
+			name: 'Экономика',
+			from: '9ИСП-42-18',
+			text: 'Сделать презинтацию',
+			isChecked: false
+		},
+		{
+			name: 'Диполм',
+			from: 'Ваши задания',
+			text: 'Сверстать ToDo страницу',
+			isChecked: true
+		},
+		{
+			name: 'Тестовое задание',
+			from: 'Тестовая группа',
+			text: 'Протестировать ToDo, а также протестировать переход текста на новый ряд',
+			isChecked: true
+		}
+	];
 </script>
 
 <section>
 	<div class="container navigation">
-		<h1>Группы</h1>
-		<Button on:click={createGroup}>Создать группу</Button>
+		<h1>Задания</h1>
+		<Button on:click={createGroup} icon="add" />
+	</div>
+	<div class="sort">
+		<FlyoutButton fluid>
+			<div slot="button">Все</div>
+			<Button fluid variant="simple">Все</Button>
+			<Hr />
+			<Button fluid variant="simple">Личные</Button>
+			<Hr />
+			<Button fluid variant="simple">Из групп</Button>
+		</FlyoutButton>
 	</div>
 	<div class="groups">
-		{#each groups as group}
-			<GroupCard name={group.name} />
+		{#each todoExample as group}
+			<TodoCard name={group.name} from={group.from} text={group.text} isChecked={group.isChecked} />
 		{/each}
 	</div>
 </section>
@@ -43,6 +76,7 @@
 		grid-template-rows: min-content min-content;
 		grid-template-areas:
 			'navigation'
+			'sort'
 			'groups';
 		gap: 1rem;
 	}
@@ -51,6 +85,10 @@
 		grid-area: navigation;
 		display: flex;
 		justify-content: space-between;
+	}
+
+	.sore {
+		grid-area: sort;
 	}
 
 	.groups {

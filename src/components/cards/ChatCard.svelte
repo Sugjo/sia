@@ -1,6 +1,6 @@
 <script>
 	export let time = '00:00';
-	export let count = 0;
+	export let count = "0";
     export let icon = "/img/group.png";
 	export let name;
 	export let latsMessage;

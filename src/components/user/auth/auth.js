@@ -7,8 +7,16 @@ import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	signOut,
-	getRedirectResult
+	getRedirectResult,
+	onAuthStateChanged
 } from 'firebase/auth';
+
+const cookieSettings = {
+	httpOnly: true,
+	maxAge: 60 * 60 * 24 * 7,
+	sameSite: 'Sia',
+	path: '/'
+};
 
 export const login = async (email, password) => {
 	try {
@@ -56,7 +64,8 @@ export const logout = () => {
 
 export const googleAuth = async () => {
 	try {
-		await signInWithRedirect(auth, provider);
+		let res = await signInWithRedirect(auth, provider);
+		return res;
 	} catch (error) {
 		return { type: 'other', message: error.message };
 	}
@@ -66,7 +75,6 @@ export const googleAuthHandler = async () => {
 	try {
 		const redirectResult = await getRedirectResult(auth);
 		if (!redirectResult) return;
-		userStore.update((user) => (user = { ...user, uid: redirectResult.user.uid }));
 	} catch (error) {
 		if (error.code == 'auth/account-exists-with-different-credential')
 			return 'TODO: https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#signinwithpopup';

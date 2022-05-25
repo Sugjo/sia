@@ -1,6 +1,7 @@
 <script>
 	import Input from '$lib/generic/Input.svelte';
 	import Button from '$lib/generic/Button.svelte';
+import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
 
 	let email;
 	let error = {
@@ -24,6 +25,8 @@
 
 	<Button on:click icon="refresh">dsd</Button>
 	<Button on:click icon="refresh" />
+
+	adsad
 
 	{email}
 </section>

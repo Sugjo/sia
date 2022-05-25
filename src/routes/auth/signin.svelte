@@ -1,6 +1,5 @@
 <script>
 	import GoogleAuth from '$lib/user/auth/GoogleAuth.svelte';
-	import { login } from '$lib/user/auth/auth';
 	import Error from '$lib/generic/Error.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import Button from '$lib/generic/Button.svelte';
@@ -9,7 +8,26 @@
 	let password;
 	let error;
 
-	const submitHandler = async () => (error = await login(email, password));
+	const submitHandler = async () => {
+		try {
+			const res = await fetch('/auth/signin', {
+				method: 'POST',
+				body: JSON.stringify({
+					email,
+					password
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			if (res.ok) {
+				
+			}
+		} catch (err) {
+			error = err
+		}
+	};
 </script>
 
 <svelte:head>
@@ -77,7 +95,8 @@
 		flex-direction: column;
 	}
 
-	section, form {
+	section,
+	form {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;

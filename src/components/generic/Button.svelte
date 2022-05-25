@@ -9,9 +9,10 @@
 
 	const variants = {
 		primary: 'primary',
-		hidden: 'hidden'
+		hidden: 'hidden',
+		simple: 'simple',
+		settings: 'settings'
 	};
-
 </script>
 
 {#if href}
@@ -26,7 +27,7 @@
 		</div>
 	</a>
 {:else}
-	<button on:click {type} {disabled} class={variants[variant] || 'primary'} class:fluid>
+	<button on:blur on:click {type} {disabled} class={variants[variant] || 'primary'} class:fluid>
 		<div class="button-body">
 			{#if icon}
 				<span class="material-icons{outlined ? '-outlined' : ''}">{icon}</span>

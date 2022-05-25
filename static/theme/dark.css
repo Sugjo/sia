@@ -5,17 +5,24 @@
 	--text-color: #fff;
 	--invert: 1;
 
-	--theme-background: brown;
-	--theme-background-hover: rgb(180, 59, 59);
+	--theme-background: #be4343;
+	--theme-background-hover: #c25f5f;
 	--theme-background-body-hover: #353c41;
 	--theme-background-second-hover: #252c30;
 	--theme-color: #fff;
 	--theme-color-hover: #fff;
 }
 
-.hidden {
+.simple {
 	--theme-background: none;
 	--theme-background-hover: none;
-	--theme-color: rgb(160, 160, 160);
-	--theme-color-hover: rgb(197, 197, 197);
+	--theme-color: #ffffff;
+	--theme-color-hover: #ffffff;
+}
+
+.settings {
+	--theme-background: none;
+	--theme-background-hover: none;
+	--theme-color: #be4343;
+	--theme-color-hover: #c25f5f;
 }

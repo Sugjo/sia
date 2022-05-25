@@ -1,4 +1,4 @@
-<!-- <script context="module">
+<script context="module">
 	import { getGroups } from '$lib/user/groups/groups';
 
 	export async function load() {
@@ -12,24 +12,42 @@
 			}
 		};
 	}
-</script> -->
+</script>
 
 <script>
 	import { createGroup } from '$lib/user/groups/groups';
 	import Button from '$lib/generic/Button.svelte';
-	import GroupCard from '$lib/GroupCard.svelte';
+	import GroupCard from '$lib/cards/GroupCard.svelte';
 
-	export let userGroups;
+	export let groups;
+
+	const groupExemple = [
+		{
+			name: '9ИСП-42-18',
+			icon: 'https://4tololo.ru/sites/default/files/images/20181503125447.jpg',
+			userCount: 30
+		},
+		{
+			name: 'Дипломники 2022',
+			icon: 'http://hayastannews.com/wp-content/uploads/2021/12/kak-proverit-diplom-v-antiplagiat-vuz-2-2048x1365-1.jpg',
+			userCount: 10
+		},
+		{
+			name: 'Тестовая группа',
+			icon: 'https://www.pngjoy.com/pngm/177/14873604_usaf-logo-learn-about-testing-methods-transparent-png.png',
+			userCount: 1
+		}
+	];
 </script>
 
 <section>
 	<div class="container navigation">
 		<h1>Группы</h1>
-		<Button on:click={createGroup}>Создать группу</Button>
+		<Button on:click={createGroup} icon="add" />
 	</div>
 	<div class="groups">
-		{#each userGroups as group}
-			<GroupCard name={group.name} />
+		{#each groupExemple as group}
+			<GroupCard icon={group.icon} userCount={group.userCount} name={group.name} />
 		{/each}
 	</div>
 </section>

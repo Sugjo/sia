@@ -1,4 +1,8 @@
 <script>
+	import Button from '$lib/generic/Button.svelte';
+
+	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
+
 	import MenuItem from './MenuItem.svelte';
 
 	export let type = 'desktop';
@@ -10,30 +14,27 @@
 			href: '/todo'
 		},
 		{
-			title: 'Чат',
-			icon: 'chat_bubble_outline',
-			href: '/chat'
-		},
-		{
-			title: 'Аккаунт',
-			icon: 'account_circle',
-			href: '/account'
-		},
-		// {
-		// 	title: 'Настройки',
-		// 	icon: 'settings',
-		// 	href: '/settings'
-		// },
-		{
 			title: 'Группы',
 			icon: 'group',
 			href: '/groups'
 		},
+		// {
+		// 	title: 'Чат',
+		// 	icon: 'chat_bubble_outline',
+		// 	href: '/chat'
+		// },
 		{
-			title: 'Тесты',
-			icon: 'science',
-			href: '/test'
+			title: 'Аккаунт',
+			flyout: true,
+			icon: 'account_circle',
+			href: '/account'
 		}
+
+		// {
+		// 	title: 'Тесты',
+		// 	icon: 'science',
+		// 	href: '/test'
+		// }
 	];
 </script>
 
@@ -69,6 +70,10 @@
 	}
 
 	.mobile {
+		position: sticky;
+		bottom: 0;
+		width: 100%;
+
 		grid-auto-flow: column;
 		-webkit-box-shadow: var(--app-shadow);
 		-moz-box-shadow: var(--app-shadow);
@@ -76,7 +81,5 @@
 
 		background-color: var(--second-color);
 		flex-direction: row;
-
-		width: 100%;
 	}
 </style>

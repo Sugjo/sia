@@ -1,5 +1,6 @@
 <script>
-	import Button from './generic/Button.svelte';
+	import Button from '$lib/generic/Button.svelte';
+	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
 
 	export let icon = '/img/group.png';
 	export let userCount = 0;
@@ -17,7 +18,10 @@
 		</div>
 	</div>
 	<div class="card-footer">
-		<Button variant="hidden" icon="more_horiz"/>
+		<FlyoutButton position="left" icon="more_horiz" variant="hidden">
+			<Button variant="simple" fluid>Изменить</Button>
+			<Button variant="simple" fluid>Удалить</Button>
+		</FlyoutButton>
 	</div>
 </div>
 
@@ -25,6 +29,11 @@
 	.card {
 		display: grid;
 		grid-template-columns: min-content 1fr min-content;
+	}
+
+	.card img {
+		object-fit: cover;
+		border-radius: 25px;
 	}
 
 	.card-body {
