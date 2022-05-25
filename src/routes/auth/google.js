@@ -1,4 +1,4 @@
-import { getUserToken, googleAuth, googleAuthHandler } from '$lib/user/auth/auth';
+import { googleAuth, googleAuthHandler } from '$lib/user/auth/auth';
 
 export async function post() {
 	try {
