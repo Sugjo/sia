@@ -5,9 +5,12 @@
 	import ThemeSwitsh from '$lib/layout/ThemeSwitsh.svelte';
 	import { settings } from '../store/settings.store';
 	import { setContext } from 'svelte';
+	import GetDeviceType from '$lib/tools/GetDeviceType.svelte';
 
 	setContext('settings', settings);
 </script>
+
+<GetDeviceType />
 
 <ThemeSwitsh theme={$settings.theme}>
 	<AuthProvider>

@@ -1,11 +1,5 @@
 <script>
-	import { googleAuth, googleAuthHandler } from '$lib/user/auth/auth';
-	import { onMount } from 'svelte';
-
-	onMount(async () => {
-		const sessionId = await fetch('/auth/google').then((e) => e.json());
-		console.log('sessionId: ', await sessionId);
-	});
+	import { googleAuth } from '$lib/user/auth/auth';
 
 	let error;
 </script>

@@ -25,6 +25,30 @@ main {
 	padding: 1rem;
 }
 
+.cl-content {
+	overflow-wrap: anywhere;
+	border-radius: 0 0 5px 5px;
+}
+
+.cl-actionbar {
+	border-radius: 5px 5px 0 0;
+}
+
+.cl {
+	border-radius: 5px;
+}
+
+.cl-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 4px #0000002f;
+	border-radius: 5px;
+}
+
+.cl-content:focus {
+	outline: none;
+	box-shadow: 0 0 0 4px #0000002f;
+}
+
 .container {
 	background-color: var(--second-color);
 	-webkit-box-shadow: var(--app-shadow);
@@ -47,4 +71,11 @@ main {
 	--theme-background-hover: #c25f5f;
 	--theme-color: #fff;
 	--theme-color-hover: #fff;
+}
+
+.secondary {
+	--theme-background: #acacac;
+	--theme-background-hover: #c4c4c4;
+	--theme-color: #000000;
+	--theme-color-hover: #000000;
 }

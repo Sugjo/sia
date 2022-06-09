@@ -1,4 +1,7 @@
 <script>
+import Error from "./Error.svelte";
+
+
 	export let href = null;
 	export let icon = null;
 	export let type = 'button';
@@ -7,16 +10,18 @@
 	export let outlined = false;
 	export let variant = 'primary';
 
-	const variants = {
-		primary: 'primary',
-		hidden: 'hidden',
-		simple: 'simple',
-		settings: 'settings'
-	};
+	const variants = ['primary', 'secondary', 'hidden', 'simple', 'settings'];
+	if (!variants.includes(variant)) throw "There is no such variant"
 </script>
 
 {#if href}
-	<a on:click {href} {disabled} class={variants[variant] || 'primary'} class:fluid>
+	<a
+		on:click
+		{href}
+		{disabled}
+		class={variants.find((e) => variant === e) || 'primary'}
+		class:fluid
+	>
 		<div class="button-body">
 			{#if icon}
 				<span class="material-icons{outlined ? '-outlined' : ''}">{icon}</span>
@@ -27,7 +32,14 @@
 		</div>
 	</a>
 {:else}
-	<button on:blur on:click {type} {disabled} class={variants[variant] || 'primary'} class:fluid>
+	<button
+		on:blur
+		on:click
+		{type}
+		{disabled}
+		class={variants.find((e) => variant === e) || 'primary'}
+		class:fluid
+	>
 		<div class="button-body">
 			{#if icon}
 				<span class="material-icons{outlined ? '-outlined' : ''}">{icon}</span>

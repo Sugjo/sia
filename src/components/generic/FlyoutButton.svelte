@@ -30,9 +30,13 @@
 	on:mouseleave={() => (onFlyout = false)}
 	class="flyout {positions[position]}"
 >
-	<Button on:click={closeHandler} {icon} {fluid} {disabled} {outlined} {variant} >
-		<slot name="button" />
-	</Button>
+	{#if $$slots.button}
+		<Button on:click={closeHandler} {icon} {fluid} {disabled} {outlined} {variant}>
+			<slot name="button" />
+		</Button>
+	{:else}
+		<Button on:click={closeHandler} {icon} {fluid} {disabled} {outlined} {variant} />
+	{/if}
 	<div class="flyout-body" class:close>
 		<slot />
 	</div>

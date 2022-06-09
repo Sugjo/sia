@@ -1,7 +1,8 @@
 <script>
 	import Input from '$lib/generic/Input.svelte';
-	import Button from '$lib/generic/Button.svelte';
-import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
+	import Editor from 'cl-editor/src/Editor.svelte';
+	import MdEditor from '$lib/generic/MdEditor.svelte';
+	import ModalButton from '$lib/generic/ModalButton.svelte';
 
 	let email;
 	let error = {
@@ -23,10 +24,8 @@ import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
 		required
 	/>
 
-	<Button on:click icon="refresh">dsd</Button>
-	<Button on:click icon="refresh" />
-
-	adsad
-
-	{email}
+	<ModalButton icon="add">
+		<div slot="title">Добавить задание</div>
+		<MdEditor />
+	</ModalButton>
 </section>

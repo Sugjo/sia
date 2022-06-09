@@ -1,11 +1,8 @@
 <script>
-	import Button from '$lib/generic/Button.svelte';
-
-	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
-
+	import { getContext } from 'svelte';
 	import MenuItem from './MenuItem.svelte';
 
-	export let type = 'desktop';
+	const settings = getContext('settings');
 
 	let menuElements = [
 		{
@@ -28,19 +25,19 @@
 			flyout: true,
 			icon: 'account_circle',
 			href: '/account'
-		}
+		},
 
-		// {
-		// 	title: 'Тесты',
-		// 	icon: 'science',
-		// 	href: '/test'
-		// }
+		{
+			title: 'Тесты',
+			icon: 'science',
+			href: '/test'
+		}
 	];
 </script>
 
-<aside class={type == 'desktop' ? 'desktop' : 'mobile'}>
+<aside class={$settings?.deviceType == 'desktop' ? 'desktop' : 'mobile'}>
 	{#each menuElements as element}
-		<MenuItem {type} href={element.href}>
+		<MenuItem type={$settings?.deviceType} href={element.href}>
 			<span slot="title">{element.title}</span>
 			<span class="material-icons" slot="icon"> {element.icon} </span>
 		</MenuItem>

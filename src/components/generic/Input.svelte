@@ -5,17 +5,21 @@
 <script>
 	import { onMount } from 'svelte';
 	import Error from '$lib/generic/Error.svelte';
+	import { browser } from '$app/env';
 
 	export let inputType = 'text';
 	export let name = '';
-	export let error;
+	export let error = null;
 	export let label = '';
 	export let value = '';
 	export let placeholder = '';
 	export let required = false;
+	export let isFocus = false;
+	let inputElement;
+
+	$: if (browser && isFocus) inputElement?.focus();
 
 	let eltId = 'input_' + counter++;
-	let inputElement;
 	onMount(() => {
 		inputElement.type = inputType;
 	});
@@ -29,6 +33,7 @@
 		id={eltId}
 		class:error={error?.type == name && error?.message}
 		class="input"
+		{name}
 		{placeholder}
 		{required}
 		bind:value
@@ -71,7 +76,7 @@
 
 	label {
 		font-size: 14px;
-		color: #575757;
+		color: var(--text-muted);
 		margin-bottom: 0.5rem;
 	}
 </style>

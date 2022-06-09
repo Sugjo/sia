@@ -1,7 +1,9 @@
 <script>
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
-	import { settings } from '../store/settings.store';
+	import { getContext } from 'svelte';
+	
+	const settings = getContext('settings');
 
 	if (browser) goto($settings.homepage || '/home');
 </script>

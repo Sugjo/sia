@@ -25,8 +25,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"autoprefixer": "^10.4.7",
+		"cl-editor": "https://github.com/sugjo/cl-editor.git",
 		"cookie": "^0.5.0",
 		"firebase": "^9.6.10",
+		"shortid": "^2.2.16",
 		"svelte-local-storage-store": "^0.2.6"
 	}
 }

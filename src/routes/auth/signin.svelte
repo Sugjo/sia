@@ -1,12 +1,29 @@
+<script context="module">
+	import { getRedirectResult } from 'firebase/auth';
+	import { auth } from '$lib/user/firebase';
+	import { handle } from '$lib/tools/handle';
+
+	export const load = async () => {
+		let [redirectHandler, redirectError] = await handle(getRedirectResult(auth));
+
+		return {
+			props: {
+				error: redirectError || ''
+			}
+		};
+	};
+</script>
+
 <script>
 	import GoogleAuth from '$lib/user/auth/GoogleAuth.svelte';
 	import Error from '$lib/generic/Error.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import Button from '$lib/generic/Button.svelte';
+	
+	export let error;
 
 	let email;
 	let password;
-	let error;
 
 	const submitHandler = async () => {
 		try {
@@ -22,10 +39,9 @@
 			});
 
 			if (res.ok) {
-				
 			}
 		} catch (err) {
-			error = err
+			error = err;
 		}
 	};
 </script>

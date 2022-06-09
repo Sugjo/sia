@@ -3,17 +3,9 @@
 	import Menu from '$lib/menu/Menu.svelte';
 
 	import { onMount } from 'svelte';
-
-	let width;
-	$: type = width >= 800 ? 'desktop' : 'mobile';
-
-	onMount(() => resizeHandler());
-	const resizeHandler = () => (width = window.innerWidth);
 </script>
 
-<svelte:window on:resize={resizeHandler} />
-
-<Menu {type} />
+<Menu/>
 
 <main>
 	<slot />

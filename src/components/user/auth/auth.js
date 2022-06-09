@@ -70,14 +70,3 @@ export const googleAuth = async () => {
 		return { type: 'other', message: error.message };
 	}
 };
-
-export const googleAuthHandler = async () => {
-	try {
-		const redirectResult = await getRedirectResult(auth);
-		if (!redirectResult) return;
-	} catch (error) {
-		if (error.code == 'auth/account-exists-with-different-credential')
-			return 'TODO: https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#signinwithpopup';
-		return { type: 'other', message: error.message };
-	}
-};

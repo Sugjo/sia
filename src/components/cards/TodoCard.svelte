@@ -1,15 +1,30 @@
 <script>
+	import { auth } from '$lib/user/firebase';
 	import Button from '$lib/generic/Button.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
+import ModalButton from '$lib/generic/ModalButton.svelte';
 
+	export let id;
 	export let name;
 	export let from;
 	export let text;
 	export let isChecked = false;
 
+	$: console.log(text?.split(/\r\n|\r|\n/).length);
+
+	$: console.log(id, name, from, text, isChecked);
+
 	let isExpanded = false;
 	const checkHandler = () => (isChecked = !isChecked);
 	const showMore = () => (isExpanded = !isExpanded);
+	const del = async () => {
+		if (!auth.currentUser) logout();
+		let req = await fetch('/api/todo', {
+			method: 'DELETE',
+			body: JSON.stringify({ id, uid: auth.currentUser.uid })
+		});
+		return req;
+	};
 </script>
 
 <div class="card">
@@ -24,8 +39,8 @@
 		<div class="body-title">
 			{name} из <span>{from}</span>
 		</div>
-		<div class={!isExpanded ? 'close' : ''} style={text ? '' : 'visibility: hidden'}>
-			{text}
+		<div class="text {!isExpanded ? 'close' : ''}" style={text ? '' : 'visibility: hidden'}>
+			{@html text || ''}
 		</div>
 	</div>
 	<Button
@@ -36,8 +51,11 @@
 	/>
 
 	<FlyoutButton position="left" icon="more_horiz" variant="hidden">
+		<ModalButton>
+			
+		</ModalButton>
 		<Button variant="simple" fluid>Изменить</Button>
-		<Button variant="simple" fluid>Удалить</Button>
+		<Button on:click={del} variant="simple" fluid>Удалить</Button>
 	</FlyoutButton>
 </div>
 
@@ -69,6 +87,10 @@
 		position: relative;
 		width: 25px;
 		height: 25px;
+	}
+
+	.text {
+		overflow-wrap: anywhere;
 	}
 
 	.isChecked {
