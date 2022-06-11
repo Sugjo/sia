@@ -15,11 +15,17 @@
 	export let placeholder = '';
 	export let required = false;
 	export let isFocus = false;
+	export let type;
+
 	let inputElement;
+	let eltId = 'input_' + counter++;
 
 	$: if (browser && isFocus) inputElement?.focus();
 
-	let eltId = 'input_' + counter++;
+	function typeAction(node) {
+		node.type = "password";
+	}
+
 	onMount(() => {
 		inputElement.type = inputType;
 	});
@@ -31,6 +37,7 @@
 	{/if}
 	<input
 		id={eltId}
+		use:typeAction
 		class:error={error?.type == name && error?.message}
 		class="input"
 		{name}

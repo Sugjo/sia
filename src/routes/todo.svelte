@@ -34,9 +34,11 @@
 	import { logout } from '$lib/user/auth/auth';
 
 	export let todoCb;
-	export let todoData;
 
+	let todoData;
 	let isLoad = true;
+
+	$: console.log(todoData);
 
 	$: todoCb((e) => {
 		todoData = e && Object.entries(e);
@@ -44,8 +46,8 @@
 	});
 
 	let name;
-	let from = 'Gparty';
 	let text;
+	let from = 'Gparty';
 	let canSubmit = true;
 
 	const createTodo = async () => {
@@ -62,7 +64,6 @@
 		});
 		canSubmit = true;
 		closeModalHandler();
-		return req;
 	};
 
 	const closeModalHandler = () => {
@@ -75,12 +76,22 @@
 	<div class="container navigation">
 		<h1>Задания</h1>
 		<ModalButton icon="add">
-			
+			<svelte:fragment slot="title">Добавить задание</svelte:fragment>
+			<form on:submit|preventDefault={createTodo}>
+				<Input bind:value={name} label="Название задания" isFocus required />
+				<Input type="password" />
+				<select />
+				<MdEditor on:change={(e) => (text = e.detail)} />
+				<div class="buttons">
+					<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
+					<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
+				</div>
+			</form>
 		</ModalButton>
 	</div>
 	<div class="sort">
 		<FlyoutButton fluid>
-			<div slot="button">Все</div>
+			<svelte:fragment slot="button">Все</svelte:fragment>
 			<Button fluid variant="simple" on:click={createTodo}>Все</Button>
 			<Hr />
 			<Button fluid variant="simple">Личные</Button>

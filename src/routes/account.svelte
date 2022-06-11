@@ -26,8 +26,7 @@
 		<div class="settings-item">
 			<div class="title">Тема:</div>
 			<FlyoutButton fluid variant="settings">
-				<span slot="button"> {theme()} </span>
-
+				<svelte:fragment slot="button">{theme()}</svelte:fragment>
 				<Button fluid variant="simple" on:click={autoThemeHandler}>Авто</Button>
 				<Hr />
 				<Button fluid variant="simple" on:click={darkThemeHandler}>Тёмная</Button>
@@ -96,7 +95,7 @@
 	.account-action {
 		display: flex;
 		flex-direction: column;
-		gap: .5rem;
+		gap: 0.5rem;
 		margin-top: 4rem;
 	}
 

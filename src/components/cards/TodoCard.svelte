@@ -10,10 +10,6 @@ import ModalButton from '$lib/generic/ModalButton.svelte';
 	export let text;
 	export let isChecked = false;
 
-	$: console.log(text?.split(/\r\n|\r|\n/).length);
-
-	$: console.log(id, name, from, text, isChecked);
-
 	let isExpanded = false;
 	const checkHandler = () => (isChecked = !isChecked);
 	const showMore = () => (isExpanded = !isExpanded);

@@ -16,22 +16,3 @@ export const createGroup = async () => {
 	}
 };
 
-export const getGroups = async () => {
-	let querySnapshot;
-
-	querySnapshot = await getDoc(doc(db, 'users', '0BOeGj0ztyLFlHT7856oxHhji2c2'));
-
-	if (!querySnapshot.exists()) return 'No such document!';
-
-	const userGroups = querySnapshot.data().groups.map(async (e) => {
-		return getGroup(e);
-	});
-
-	return await Promise.all(userGroups);
-};
-
-const getGroup = async (groupID) => {
-	const querySnapshot = await getDoc(doc(db, 'groups', `${groupID}`));
-	if (querySnapshot.exists()) return querySnapshot.data();
-	return 'No such document!';
-};

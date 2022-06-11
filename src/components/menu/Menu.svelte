@@ -38,7 +38,7 @@
 <aside class={$settings?.deviceType == 'desktop' ? 'desktop' : 'mobile'}>
 	{#each menuElements as element}
 		<MenuItem type={$settings?.deviceType} href={element.href}>
-			<span slot="title">{element.title}</span>
+			<svelte:fragment slot="title">{element.title}</svelte:fragment>
 			<span class="material-icons" slot="icon"> {element.icon} </span>
 		</MenuItem>
 	{/each}

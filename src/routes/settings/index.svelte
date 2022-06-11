@@ -25,8 +25,7 @@
 		<div class="settings-item">
 			<div class="title">Тема:</div>
 			<FlyoutButton fluid variant="settings">
-				<span slot="button"> {theme()} </span>
-
+				<svelte:fragment slot="button">{theme()}</svelte:fragment>
 				<Button fluid variant="simple" on:click={autoThemeHandler}>Авто</Button>
 				<Hr />
 				<Button fluid variant="simple" on:click={darkThemeHandler}>Тёмная</Button>
@@ -55,7 +54,7 @@
 			<div class="title">Пароль:</div>
 			<Button fluid variant="settings">Изменить</Button>
 		</div>
-		
+
 		<div class="delete-account">
 			<Button fluid variant="primary">Удалить аккаунт</Button>
 		</div>

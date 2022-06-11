@@ -25,7 +25,7 @@
 	/>
 
 	<ModalButton icon="add">
-		<div slot="title">Добавить задание</div>
+		<svelte:fragment slot="title">Добавить задание</svelte:fragment>
 		<MdEditor />
 	</ModalButton>
 </section>

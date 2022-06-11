@@ -1,10 +1,20 @@
 <script>
 	import Button from '$lib/generic/Button.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
+	import { auth } from '$lib/user/firebase';
 
 	export let icon = '/img/group.png';
 	export let userCount = 0;
 	export let name;
+	export let id;
+
+	const delGroupOnUser = async () => {
+		if (!auth.currentUser) logout();
+		await fetch('/api/groups/on-user-del', {
+			method: 'DELETE',
+			body: JSON.stringify({ id, uid: auth.currentUser.uid })
+		});
+	};
 </script>
 
 <div class="card">
@@ -20,7 +30,7 @@
 	<div class="card-footer">
 		<FlyoutButton position="left" icon="more_horiz" variant="hidden">
 			<Button variant="simple" fluid>Изменить</Button>
-			<Button variant="simple" fluid>Удалить</Button>
+			<Button on:click={delGroupOnUser} variant="simple" fluid>Выйти</Button>
 		</FlyoutButton>
 	</div>
 </div>
