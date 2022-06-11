@@ -4,6 +4,7 @@
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
 	import Hr from '$lib/generic/Hr.svelte';
 	import { getContext } from 'svelte';
+	import DefaultPage from '$lib/layout/DefaultPage.svelte';
 
 	const settings = getContext('settings');
 
@@ -18,10 +19,7 @@
 	const lightThemeHandler = () => ($settings.theme = 'light');
 </script>
 
-<section>
-	<div class="container navigation">
-		<h1>Аккаунт</h1>
-	</div>
+<DefaultPage title="Аккаунт">
 	<div class="settings">
 		<div class="settings-item">
 			<div class="title">Тема:</div>
@@ -62,21 +60,9 @@
 			<Button fluid>Удалить аккаунт</Button>
 		</div>
 	</div>
-</section>
+</DefaultPage>
 
 <style>
-	section {
-		height: 100%;
-		width: 100%;
-
-		display: grid;
-		grid-template-rows: min-content min-content;
-		grid-template-areas:
-			'navigation'
-			'settings';
-		gap: 1rem;
-	}
-
 	.settings {
 		display: flex;
 		flex-direction: column;
@@ -97,15 +83,5 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		margin-top: 4rem;
-	}
-
-	.navigation {
-		grid-area: navigation;
-		display: flex;
-		justify-content: space-between;
-	}
-
-	h1 {
-		margin: 0;
 	}
 </style>

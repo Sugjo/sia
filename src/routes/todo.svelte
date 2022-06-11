@@ -7,12 +7,11 @@
 		return {
 			props: {
 				todoCb: function (cb = (e) => {}) {
-					auth.onAuthStateChanged(async (user) => {
+					auth.onAuthStateChanged((user) => {
 						if (!user?.uid) return;
-						const db = getDatabase();
-						const starCountRef = ref(db, 'todo/' + user?.uid);
-						onValue(starCountRef, (snapshot) => {
-							const data = snapshot.val();
+						const todoRef = ref(getDatabase(), 'todo/' + user?.uid);
+						onValue(todoRef, (todoData) => {
+							const data = todoData.val();
 							cb(data);
 						});
 					});
@@ -31,29 +30,30 @@
 	import MdEditor from '$lib/generic/MdEditor.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import { closeAllModal } from '$lib/tools/closeAllModal';
-	import { logout } from '$lib/user/auth/auth';
+	import DefaultPage from '$lib/layout/DefaultPage.svelte';
+
+	//Get ToDo data
 
 	export let todoCb;
 
-	let todoData;
-	let isLoad = true;
-
-	$: console.log(todoData);
-
-	$: todoCb((e) => {
+	todoCb((e) => {
 		todoData = e && Object.entries(e);
 		isLoad = false;
 	});
 
+	let todoData;
+
 	let name;
 	let text;
 	let from = 'Gparty';
+
+	let isLoad = true;
 	let canSubmit = true;
 
 	const createTodo = async () => {
+		if (!auth.currentUser) return;
 		canSubmit = false;
-		if (!auth.currentUser) logout();
-		let req = await fetch('/api/todo', {
+		await fetch('/api/todo', {
 			method: 'POST',
 			body: JSON.stringify({
 				uid: auth.currentUser.uid,
@@ -72,23 +72,25 @@
 	};
 </script>
 
-<section>
-	<div class="container navigation">
-		<h1>Задания</h1>
+<DefaultPage title="Задания">
+	<svelte:fragment slot="header">
 		<ModalButton icon="add">
 			<svelte:fragment slot="title">Добавить задание</svelte:fragment>
-			<form on:submit|preventDefault={createTodo}>
-				<Input bind:value={name} label="Название задания" isFocus required />
-				<Input type="password" />
-				<select />
-				<MdEditor on:change={(e) => (text = e.detail)} />
-				<div class="buttons">
-					<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
-					<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
-				</div>
-			</form>
+			<div class="form-layout">
+				<form on:submit|preventDefault={createTodo}>
+					<Input bind:value={name} label="Название задания" isFocus required />
+					<Input type="password" />
+					<select />
+					<MdEditor on:change={(e) => (text = e.detail)} />
+					<div class="buttons">
+						<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
+						<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
+					</div>
+				</form>
+			</div>
 		</ModalButton>
-	</div>
+	</svelte:fragment>
+
 	<div class="sort">
 		<FlyoutButton fluid>
 			<svelte:fragment slot="button">Все</svelte:fragment>
@@ -116,44 +118,29 @@
 			Заданий нет!
 		{/if}
 	</div>
-</section>
+</DefaultPage>
 
 <style>
-	section {
-		height: 100%;
+	.form-layout {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
-
-		display: grid;
-		grid-template-rows: min-content min-content;
-		grid-template-areas:
-			'navigation'
-			'sort'
-			'groups';
-		gap: 1rem;
+		height: 100%;
 	}
 
 	.buttons {
-		position: fixed;
 		display: flex;
-		background-color: var(--second-color);
-		box-shadow: var(--app-shadow);
+		margin-top: 3rem;
 		gap: 0.5rem;
 		width: 100%;
-		padding: 0.5rem 2rem;
-		bottom: 0;
-		left: 0;
-	}
-
-	.navigation {
-		grid-area: navigation;
-		display: flex;
-		justify-content: space-between;
 	}
 
 	form {
-		display: grid;
-		grid-template-rows: min-content min-content min-content;
-		height: 100%;
+		max-width: 800px;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
 		gap: 0.5rem;
 	}
 
@@ -164,9 +151,5 @@
 		width: 100%;
 		padding: 1rem;
 		grid-area: groups;
-	}
-
-	h1 {
-		margin: 0;
 	}
 </style>

@@ -7,6 +7,7 @@
 	export let userCount = 0;
 	export let name;
 	export let id;
+	export let prewiew = false;
 
 	const delGroupOnUser = async () => {
 		if (!auth.currentUser) logout();
@@ -18,7 +19,7 @@
 </script>
 
 <div class="card">
-	<img src={icon} alt="" width="50" height="50" />
+	<img src={icon} alt="Аватарка группы" />
 	<div class="card-body">
 		<div class="body-title">
 			{name}
@@ -29,8 +30,13 @@
 	</div>
 	<div class="card-footer">
 		<FlyoutButton position="left" icon="more_horiz" variant="hidden">
-			<Button variant="simple" fluid>Изменить</Button>
-			<Button on:click={delGroupOnUser} variant="simple" fluid>Выйти</Button>
+			{#if !prewiew}
+				<Button variant="simple" fluid>Изменить</Button>
+				<Button on:click={delGroupOnUser} variant="simple" fluid>Выйти</Button>
+			{:else}
+				<Button variant="simple" fluid>Изменить</Button>
+				<Button variant="simple" fluid>Выйти</Button>
+			{/if}
 		</FlyoutButton>
 	</div>
 </div>
@@ -44,6 +50,8 @@
 	.card img {
 		object-fit: cover;
 		border-radius: 25px;
+		width: 50px;
+		height: 50px;
 	}
 
 	.card-body {

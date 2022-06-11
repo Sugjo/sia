@@ -1,5 +1,5 @@
 :root {
-	--text-muted: #dadada;
+	--text-muted: #858585;
 }
 
 * {
@@ -36,6 +36,7 @@ main {
 
 .cl {
 	border-radius: 5px;
+	width: 300px;
 }
 
 .cl-button:focus {

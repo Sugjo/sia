@@ -1,61 +1,61 @@
 <script context="module">
 	import { auth, db } from '$lib/user/firebase';
 	import { doc, getDoc } from 'firebase/firestore';
-
-	export async function load() {
-		return {
-			props: {
-				groupCb: function (cb = (e) => {}) {
-					auth.onAuthStateChanged(async (user) => {
-						if (!user?.uid) return;
-						const citiesRef = doc(db, 'users', user?.uid);
-						const userData = await getDoc(citiesRef);
-						const groups = [];
-						for await (const group of userData.data().groups) {
-							let data = (await getDoc(group)).data();
-							console.log(group.id);
-							if (!data) {
-								groups.push({
-									name: 'Группа удалена',
-									icon: 'http://cdn.onlinewebfonts.com/svg/img_218950.png',
-									userCount: 0,
-									id: group.id
-								});
-								continue;
-							}
-							groups.push({ ...data, id: group.id });
-						}
-						cb(groups);
-					});
-				}
-			}
-		};
-	}
 </script>
 
 <script>
-	import { createGroup } from '$lib/user/groups/groups';
 	import Button from '$lib/generic/Button.svelte';
 	import GroupCard from '$lib/cards/GroupCard.svelte';
+	import ModalButton from '$lib/generic/ModalButton.svelte';
+	import Input from '$lib/generic/Input.svelte';
+	import { closeAllModal } from '$lib/tools/closeAllModal';
+	import DefaultPage from '$lib/layout/DefaultPage.svelte';
 
-	export let groupCb;
-
-	let isLoad = true;
+	let isLoad = false;
+	let canSubmit = true;
 	let groupsData;
+	let name;
+	let imgUrl;
 
 	$: console.log(groupsData);
+	const closeModalHandler = () => {
+		name = null;
+		imgUrl = null;
+		closeAllModal();
+	};
 
-	$: groupCb((e) => {
-		groupsData = e;
-		isLoad = false;
-	});
+	const checkURL = (url) => {
+		if (url?.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+			return url;
+		}
+	};
 </script>
 
-<section>
-	<div class="container navigation">
-		<h1>Группы</h1>
-		<Button on:click={createGroup} icon="add" />
-	</div>
+<DefaultPage title="Группы">
+	<svelte:fragment slot="header">
+		<ModalButton icon="add">
+			<svelte:fragment slot="title">Создание группы</svelte:fragment>
+			<div class="form-layout">
+				<form on:submit|preventDefault>
+					<div class="avatar">
+						<GroupCard
+							icon={checkURL(imgUrl) || 'http://cdn.onlinewebfonts.com/svg/img_218950.png'}
+							userCount="много"
+							name={name || 'Ваше название группы'}
+							prewiew
+						/>
+					</div>
+					<Input type="text" label="Название" bind:value={name} required />
+					<Input type="url" label="Ссылка на аватарку группы" bind:value={imgUrl} required />
+					<div class="buttons">
+						<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
+						<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
+					</div>
+				</form>
+			</div>
+		</ModalButton>
+	</svelte:fragment>
+
 	<div class="groups">
 		{#if groupsData}
 			{#each groupsData as { icon, userCount, name, id }}
@@ -64,28 +64,37 @@
 		{:else if isLoad}
 			Загрузка...
 		{:else}
-			Заданий нет!
+			У вас нет подписок! Попросите добавить вас в группу, или созадйте свою.
 		{/if}
 	</div>
-</section>
+</DefaultPage>
 
 <style>
-	section {
-		height: 100%;
+	form {
+		max-width: 800px;
 		width: 100%;
-
-		display: grid;
-		grid-template-rows: min-content min-content;
-		grid-template-areas:
-			'navigation'
-			'groups';
+		display: flex;
+		flex-direction: column;
 		gap: 1rem;
 	}
 
-	.navigation {
-		grid-area: navigation;
+	.form-layout {
 		display: flex;
-		justify-content: space-between;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+
+	.buttons {
+		display: flex;
+		margin-top: 3rem;
+		gap: 0.5rem;
+		width: 100%;
+	}
+
+	.avatar {
+		margin-bottom: 3rem;
 	}
 
 	.groups {
@@ -95,9 +104,5 @@
 		width: 100%;
 		padding: 1rem;
 		grid-area: groups;
-	}
-
-	h1 {
-		margin: 0;
 	}
 </style>

@@ -2,7 +2,7 @@
 	import AuthProvider from '$lib/user/auth/AuthProvider.svelte';
 	import Header from '$lib/generic/Header.svelte';
 	import Loader from '$lib/layout/Loader.svelte';
-	import ThemeSwitsh from '$lib/layout/ThemeSwitsh.svelte';
+	import ThemeSwitsh from '$lib/tools/ThemeSwitsh.svelte';
 	import { settings } from '../store/settings.store';
 	import { setContext } from 'svelte';
 	import GetDeviceType from '$lib/tools/GetDeviceType.svelte';
