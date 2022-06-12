@@ -1,5 +1,5 @@
 <script>
-	import { logout } from '$lib/user/auth/auth';
+	import { logout } from '$lib/user/auth/auth'; //TODO refactoring
 	import Button from '$lib/generic/Button.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
 	import Hr from '$lib/generic/Hr.svelte';

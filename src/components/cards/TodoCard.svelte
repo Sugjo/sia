@@ -1,8 +1,8 @@
 <script>
-	import { auth } from '$lib/user/firebase';
+	import { auth } from '$lib/tools/firebase';
 	import Button from '$lib/generic/Button.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
-import ModalButton from '$lib/generic/ModalButton.svelte';
+	import ModalButton from '$lib/generic/ModalButton.svelte';
 
 	export let id;
 	export let name;
@@ -47,9 +47,7 @@ import ModalButton from '$lib/generic/ModalButton.svelte';
 	/>
 
 	<FlyoutButton position="left" icon="more_horiz" variant="hidden">
-		<ModalButton>
-			
-		</ModalButton>
+		<ModalButton />
 		<Button variant="simple" fluid>Изменить</Button>
 		<Button on:click={del} variant="simple" fluid>Удалить</Button>
 	</FlyoutButton>

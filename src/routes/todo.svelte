@@ -1,5 +1,5 @@
 <script context="module">
-	import { auth } from '$lib/user/firebase';
+	import { auth } from '$lib/tools/firebase';
 	import { getDatabase, onValue } from 'firebase/database';
 	import { ref } from 'firebase/database';
 

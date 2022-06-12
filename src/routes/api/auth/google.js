@@ -1,5 +1,4 @@
-import { googleAuth } from '$lib/user/auth/auth';
-import { getRedirectResult } from 'firebase/auth';
+import { googleAuth } from '$lib/user/auth/auth'; //TODO refactoring
 
 export async function post() {
 	try {

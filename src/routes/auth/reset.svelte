@@ -2,7 +2,7 @@
 	import Button from '$lib/generic/Button.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import Error from '$lib/generic/Error.svelte';
-	import { passwordReset } from '$lib/user/auth/auth';
+	import { passwordReset } from '$lib/user/auth/auth'; //TODO refactoring
 
 
 	let email;

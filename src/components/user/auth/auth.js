@@ -1,4 +1,4 @@
-import { auth, provider } from '../firebase';
+import { auth, provider } from '$lib/tools/firebase';
 import { settings, settingsToDefault } from '../../../store/settings.store';
 import { userToDefault, user as userStore } from '../../../store/user.store';
 import {

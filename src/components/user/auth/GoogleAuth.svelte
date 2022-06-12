@@ -1,5 +1,5 @@
 <script>
-	import { googleAuth } from '$lib/user/auth/auth';
+	import { googleAuth } from '$lib/user/auth/auth'; //TODO refactoring
 
 	let error;
 </script>

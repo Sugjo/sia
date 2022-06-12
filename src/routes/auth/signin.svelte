@@ -1,6 +1,6 @@
 <script context="module">
 	import { getRedirectResult } from 'firebase/auth';
-	import { auth } from '$lib/user/firebase';
+	import { auth } from '$lib/tools/firebase';
 	import { handle } from '$lib/tools/handle';
 
 	export const load = async () => {

@@ -1,5 +1,5 @@
 <script context="module">
-	import { auth, db } from '$lib/user/firebase';
+	import { auth, db } from '$lib/tools/firebase';
 	import { doc, getDoc } from 'firebase/firestore';
 </script>
 

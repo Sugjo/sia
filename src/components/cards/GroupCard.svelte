@@ -1,7 +1,7 @@
 <script>
 	import Button from '$lib/generic/Button.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
-	import { auth } from '$lib/user/firebase';
+	import { auth } from '$lib/tools/firebase';
 
 	export let icon = '/img/group.png';
 	export let userCount = 0;

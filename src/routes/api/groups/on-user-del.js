@@ -1,4 +1,4 @@
-import { db } from '$lib/user/firebase';
+import { db } from '$lib/tools/firebase';
 import { update } from 'firebase/database';
 import {
 	arrayRemove,

@@ -1,5 +1,4 @@
 import { handle } from '$lib/tools/handle';
-import { async } from '@firebase/util';
 import { set, ref, push, remove, getDatabase } from 'firebase/database';
 
 const dbref = getDatabase();
