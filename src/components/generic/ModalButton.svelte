@@ -4,6 +4,7 @@
 	import { fade, fly } from 'svelte/transition';
 	import { browser } from '$app/env';
 
+	export let title = '';
 	export let icon = null;
 	export let fluid = false;
 	export let isOpen = false;
@@ -41,7 +42,7 @@
 			class="modal-dialog {$settings?.deviceType}"
 		>
 			<div class="modal-header">
-				<div class="modal-title"><slot name="title" /></div>
+				<div class="modal-title">{title}</div>
 				<Button variant="hidden" icon="close" on:click={closeModal} />
 			</div>
 			<div class="modal-body">

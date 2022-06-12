@@ -31,13 +31,19 @@
 	import Input from '$lib/generic/Input.svelte';
 	import { closeAllModal } from '$lib/tools/closeAllModal';
 	import DefaultPage from '$lib/layout/DefaultPage.svelte';
+	import DataOrMessage from '$lib/layout/DataOrMessage.svelte';
+	import ModalForm from '$lib/layout/ModalForm.svelte';
 
 	//Get ToDo data
 
 	export let todoCb;
 
 	todoCb((e) => {
-		todoData = e && Object.entries(e);
+		if (e) {
+			todoData = Object.keys(e).map((key) => {
+				return { id: key, ...e[key] };
+			});
+		}
 		isLoad = false;
 	});
 
@@ -74,82 +80,43 @@
 
 <DefaultPage title="Задания">
 	<svelte:fragment slot="header">
-		<ModalButton icon="add">
-			<svelte:fragment slot="title">Добавить задание</svelte:fragment>
-			<div class="form-layout">
-				<form on:submit|preventDefault={createTodo}>
-					<Input bind:value={name} label="Название задания" isFocus required />
-					<Input type="password" />
-					<select />
-					<MdEditor on:change={(e) => (text = e.detail)} />
-					<div class="buttons">
-						<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
-						<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
-					</div>
-				</form>
-			</div>
+		<ModalButton icon="add" title="Добавить задание">
+			<ModalForm on:submit={createTodo}>
+				<Input bind:value={name} label="Название задания" isFocus required />
+				<Input type="password" />
+				<MdEditor on:change={(e) => (text = e.detail)} />
+				<svelte:fragment slot="buttons">
+					<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
+					<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
+				</svelte:fragment>
+			</ModalForm>
 		</ModalButton>
 	</svelte:fragment>
 
-	<div class="sort">
-		<FlyoutButton fluid>
-			<svelte:fragment slot="button">Все</svelte:fragment>
-			<Button fluid variant="simple" on:click={createTodo}>Все</Button>
-			<Hr />
-			<Button fluid variant="simple">Личные</Button>
-			<Hr />
-			<Button fluid variant="simple">Из групп</Button>
-		</FlyoutButton>
-	</div>
-	<div class="groups">
-		{#if todoData}
-			{#each todoData as items}
-				<TodoCard
-					id={items[0]}
-					name={items[1].name}
-					from={items[1].from}
-					text={items[1].text}
-					isChecked={items[1].isChecked}
-				/>
+	<FlyoutButton fluid>
+		<svelte:fragment slot="button">Все</svelte:fragment>
+		<Button fluid variant="simple" on:click={createTodo}>Все</Button>
+		<Hr />
+		<Button fluid variant="simple">Личные</Button>
+		<Hr />
+		<Button fluid variant="simple">Из групп</Button>
+	</FlyoutButton>
+
+	<div class="content">
+		<DataOrMessage {isLoad} data={todoData} message="Заданий нет!">
+			{#each todoData as { id, name, from, text, isChecked }}
+				<TodoCard {id} {name} {from} {text} {isChecked} />
 			{/each}
-		{:else if isLoad}
-			Загрузка...
-		{:else}
-			Заданий нет!
-		{/if}
+		</DataOrMessage>
 	</div>
 </DefaultPage>
 
 <style>
-	.form-layout {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.buttons {
-		display: flex;
-		margin-top: 3rem;
-		gap: 0.5rem;
-		width: 100%;
-	}
-
-	form {
-		max-width: 800px;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.groups {
+	.content {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
 		width: 100%;
 		padding: 1rem;
-		grid-area: groups;
 	}
 </style>

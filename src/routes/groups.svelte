@@ -10,6 +10,8 @@
 	import Input from '$lib/generic/Input.svelte';
 	import { closeAllModal } from '$lib/tools/closeAllModal';
 	import DefaultPage from '$lib/layout/DefaultPage.svelte';
+	import DataOrMessage from '$lib/layout/DataOrMessage.svelte';
+	import ModalForm from '$lib/layout/ModalForm.svelte';
 
 	let isLoad = false;
 	let canSubmit = true;
@@ -27,82 +29,57 @@
 	const checkURL = (url) => {
 		if (url?.match(/\.(jpeg|jpg|gif|png)$/) != null) {
 			return url;
+		} else {
+			return 'http://cdn.onlinewebfonts.com/svg/img_218950.png';
 		}
 	};
 </script>
 
 <DefaultPage title="Группы">
 	<svelte:fragment slot="header">
-		<ModalButton icon="add">
-			<svelte:fragment slot="title">Создание группы</svelte:fragment>
-			<div class="form-layout">
-				<form on:submit|preventDefault>
-					<div class="avatar">
-						<GroupCard
-							icon={checkURL(imgUrl) || 'http://cdn.onlinewebfonts.com/svg/img_218950.png'}
-							userCount="много"
-							name={name || 'Ваше название группы'}
-							prewiew
-						/>
-					</div>
-					<Input type="text" label="Название" bind:value={name} required />
-					<Input type="url" label="Ссылка на аватарку группы" bind:value={imgUrl} required />
-					<div class="buttons">
-						<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
-						<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
-					</div>
-				</form>
-			</div>
+		<ModalButton icon="add" title="Создание группы">
+			<ModalForm>
+				<div class="avatar">
+					<GroupCard
+						icon={checkURL(imgUrl)}
+						userCount="много"
+						name={name || 'Ваше название группы'}
+						prewiew
+					/>
+				</div>
+				<Input type="text" label="Название" bind:value={name} required />
+				<Input type="url" label="Ссылка на аватарку группы" bind:value={imgUrl} required />
+				<svelte:fragment slot="buttons">
+					<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
+					<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
+				</svelte:fragment>
+			</ModalForm>
 		</ModalButton>
 	</svelte:fragment>
 
-	<div class="groups">
-		{#if groupsData}
+	<div class="content">
+		<DataOrMessage
+			message="У вас нет подписок! Попросите добавить вас в группу, или созадйте свою."
+			data={groupsData}
+			{isLoad}
+		>
 			{#each groupsData as { icon, userCount, name, id }}
 				<GroupCard {icon} {userCount} {name} {id} />
 			{/each}
-		{:else if isLoad}
-			Загрузка...
-		{:else}
-			У вас нет подписок! Попросите добавить вас в группу, или созадйте свою.
-		{/if}
+		</DataOrMessage>
 	</div>
 </DefaultPage>
 
 <style>
-	form {
-		max-width: 800px;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	.form-layout {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.buttons {
-		display: flex;
-		margin-top: 3rem;
-		gap: 0.5rem;
-		width: 100%;
-	}
-
 	.avatar {
 		margin-bottom: 3rem;
 	}
 
-	.groups {
+	.content {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
 		width: 100%;
 		padding: 1rem;
-		grid-area: groups;
 	}
 </style>
