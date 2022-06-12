@@ -1,13 +1,13 @@
 <script>
 	export let time = '00:00';
-	export let count = "0";
-    export let icon = "/img/group.png";
+	export let count = '0';
+	export let icon = '/img/group.png';
 	export let name;
 	export let latsMessage;
 </script>
 
 <div class="card">
-	<img src="{icon}" alt="" width="50" height="50" />
+	<img src={icon} alt="" width="50" height="50" />
 	<div class="card-body">
 		<div class="body-title">
 			{name}
@@ -50,8 +50,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: brown;
-		color: #fff;
+		background-color: var(--primary-color);
+		color: var(--input-text-color);
 
 		min-width: 17px;
 		font-size: 10px;

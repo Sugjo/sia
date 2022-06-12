@@ -40,32 +40,27 @@
 
 	.icon {
 		transition: 0.2s;
-		color: rgb(138, 138, 138);
+		color: var(--text-muted);
 		overflow: hidden;
 		height: 24px;
 		width: 24px;
 	}
 
 	.active .icon {
-		color: brown;
+		color: var(--primary-color);
 	}
 
 	.title {
 		color: var(--text-color);
 	}
 
-	a.mobile:hover,
-	a.mobile:focus {
-		background-color: var(--theme-background-second-hover);
-	}
-
-	a.desktop:hover,
-	a.mobile:focus {
-		background-color: var(--theme-background-body-hover);
+	a:hover,
+	a:focus {
+		background-color: var(--body-color--hover);
 	}
 
 	a:focus {
 		outline: none;
-		box-shadow: 0 0 0 4px #0000002f;
+		box-shadow: var(--outline);
 	}
 </style>

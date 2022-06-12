@@ -7,7 +7,7 @@
 	let email;
 	let error = {
 		type: 'email',
-		message: 'adsdsad'
+		message: ''
 	};
 </script>
 

@@ -72,11 +72,9 @@
 		width: 100%;
 
 		grid-auto-flow: column;
-		-webkit-box-shadow: var(--app-shadow);
-		-moz-box-shadow: var(--app-shadow);
 		box-shadow: var(--app-shadow);
 
-		background-color: var(--second-color);
+		background-color: var(--main-color);
 		flex-direction: row;
 	}
 </style>

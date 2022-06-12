@@ -47,7 +47,6 @@
 	/>
 
 	<FlyoutButton position="left" icon="more_horiz" variant="hidden">
-		<ModalButton />
 		<Button variant="simple" fluid>Изменить</Button>
 		<Button on:click={del} variant="simple" fluid>Удалить</Button>
 	</FlyoutButton>
@@ -70,7 +69,7 @@
 
 	.body-title span {
 		font-weight: 500;
-		color: var(--theme-background);
+		color: var(--primary-color);
 	}
 
 	.check {
@@ -101,10 +100,10 @@
 
 	.material-icons-outlined {
 		user-select: none;
-		color: var(--theme-background);
+		color: var(--primary-color);
 	}
 
 	.material-icons-outlined:hover {
-		color: var(--theme-background-hover);
+		color: var(--primary-color--hover);
 	}
 </style>

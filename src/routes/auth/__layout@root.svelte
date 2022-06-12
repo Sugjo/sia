@@ -23,7 +23,7 @@
 		margin-top: 4rem;
 		font-size: 14px;
 		text-align: center;
-		color: #646464;
+		color: var(--text-muted);
 	}
 
 	:global(body) {

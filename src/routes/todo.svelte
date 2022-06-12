@@ -83,10 +83,9 @@
 		<ModalButton icon="add" title="Добавить задание">
 			<ModalForm on:submit={createTodo}>
 				<Input bind:value={name} label="Название задания" isFocus required />
-				<Input type="password" />
 				<MdEditor on:change={(e) => (text = e.detail)} />
 				<svelte:fragment slot="buttons">
-					<Button on:click={closeModalHandler} variant="secondary" fluid>Отмена</Button>
+					<Button on:click={closeModalHandler} variant="gray" fluid>Отмена</Button>
 					<Button type="submit" disabled={!canSubmit} fluid>Создать</Button>
 				</svelte:fragment>
 			</ModalForm>

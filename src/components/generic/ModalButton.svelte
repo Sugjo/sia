@@ -76,7 +76,7 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0.5rem 1rem;
-		background-color: var(--second-color);
+		background-color: var(--main-color);
 		box-shadow: var(--app-shadow);
 		width: 100%;
 		z-index: 100;
@@ -108,7 +108,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: rgba(41, 41, 41, 0.808);
+		background-color: var(--app-overlay);
 		z-index: 100;
 	}
 </style>

@@ -1,7 +1,4 @@
 <script>
-import Error from "./Error.svelte";
-
-
 	export let href = null;
 	export let icon = null;
 	export let type = 'button';
@@ -10,18 +7,13 @@ import Error from "./Error.svelte";
 	export let outlined = false;
 	export let variant = 'primary';
 
-	const variants = ['primary', 'secondary', 'hidden', 'simple', 'settings'];
-	if (!variants.includes(variant)) throw "There is no such variant"
+	const variants = ['primary', 'gray', 'hidden', 'simple', 'settings', "attention"];
+	if (!variants.includes(variant)) throw 'There is no such variant';
+	const theme = `control-${variant}`;
 </script>
 
 {#if href}
-	<a
-		on:click
-		{href}
-		{disabled}
-		class={variants.find((e) => variant === e) || 'primary'}
-		class:fluid
-	>
+	<a on:click {href} {disabled} class={theme} class:fluid>
 		<div class="button-body">
 			{#if icon}
 				<span class="material-icons{outlined ? '-outlined' : ''}">{icon}</span>
@@ -32,14 +24,7 @@ import Error from "./Error.svelte";
 		</div>
 	</a>
 {:else}
-	<button
-		on:blur
-		on:click
-		{type}
-		{disabled}
-		class={variants.find((e) => variant === e) || 'primary'}
-		class:fluid
-	>
+	<button on:blur on:click {type} {disabled} class={theme} class:fluid>
 		<div class="button-body">
 			{#if icon}
 				<span class="material-icons{outlined ? '-outlined' : ''}">{icon}</span>
@@ -57,11 +42,11 @@ import Error from "./Error.svelte";
 		-webkit-appearance: none;
 		-moz-appearance: none;
 
-		background: var(--theme-background);
-		color: var(--theme-color);
-
 		display: flex;
 		justify-content: center;
+
+		background-color: var(--primary-color);
+		color: var(--input-text-color);
 
 		padding: 0.5rem;
 		border: none;
@@ -69,8 +54,19 @@ import Error from "./Error.svelte";
 		transition: 0.2s;
 	}
 
-	.fluid {
-		width: 100%;
+	button:hover {
+		background-color: var(--primary-color--hover);
+		color: var(--input-text-color--hover);
+	}
+
+	button:focus {
+		outline: none;
+		box-shadow: var(--outline);
+	}
+
+	button:disabled {
+		filter: grayscale(50%);
+		cursor: not-allowed;
 	}
 
 	.button-body {
@@ -78,6 +74,11 @@ import Error from "./Error.svelte";
 		align-items: center;
 		font-weight: 500;
 		font-size: 17px;
+	}
+
+	button:active .button-body {
+		position: relative;
+		top: 1px;
 	}
 
 	.material-icons {
@@ -88,23 +89,7 @@ import Error from "./Error.svelte";
 		margin-left: 0.5rem;
 	}
 
-	button:hover {
-		background-color: var(--theme-background-hover);
-		color: var(--theme-color-hover);
-	}
-
-	button:focus {
-		outline: none;
-		box-shadow: 0 0 0 4px #0000002f;
-	}
-
-	button:disabled {
-		filter: grayscale(50%);
-		cursor: not-allowed;
-	}
-
-	button:active .button-body {
-		position: relative;
-		top: 1px;
+	.fluid {
+		width: 100%;
 	}
 </style>

@@ -15,16 +15,12 @@
 	export let placeholder = '';
 	export let required = false;
 	export let isFocus = false;
-	export let type;
 
 	let inputElement;
 	let eltId = 'input_' + counter++;
 
+	$: isError = error?.type == name && error?.message;
 	$: if (browser && isFocus) inputElement?.focus();
-
-	function typeAction(node) {
-		node.type = "password";
-	}
 
 	onMount(() => {
 		inputElement.type = inputType;
@@ -37,9 +33,7 @@
 	{/if}
 	<input
 		id={eltId}
-		use:typeAction
-		class:error={error?.type == name && error?.message}
-		class="input"
+		class="{isError ? 'control-error ' : 'control-input '}input"
 		{name}
 		{placeholder}
 		{required}
@@ -56,29 +50,21 @@
 		flex-direction: column;
 	}
 
-	.error {
-		background-color: #ffe2e2;
-		border: 1px #f78a8a solid;
-		color: #f93333;
-	}
-
-	.error::placeholder {
-		color: #f93333;
+	.input-box input {
+		background-color: var(--primary-color);
+		color: var(--input-text-color);
 	}
 
 	input {
 		height: 40px;
-
-		background: #ffffff;
-		border: 1px solid #d0d0d0;
 		border-radius: 5px;
-
 		padding: 10px;
+		border: var(--border);
 	}
 
 	input:focus {
 		outline: none;
-		box-shadow: 0 0 0 4px #0000002f;
+		box-shadow: var(--outline);
 	}
 
 	label {

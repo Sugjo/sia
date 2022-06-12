@@ -1,28 +1,17 @@
 :root {
 	--app-shadow: none;
+	--text-muted: #a1a1a1;
+	--main-color: #171d20;
 	--body-color: #293035;
-	--second-color: #171d20;
+	--body-color--hover: #353c41;
+	--input-border: 1px solid #131313;
 	--text-color: #fff;
+	--text-color--hover: #1d1d1d;
 	--invert: 1;
-
-	--theme-background: #be4343;
-	--theme-background-hover: #c25f5f;
-	--theme-background-body-hover: #353c41;
-	--theme-background-second-hover: #252c30;
-	--theme-color: #fff;
-	--theme-color-hover: #fff;
 }
 
-.simple {
-	--theme-background: none;
-	--theme-background-hover: none;
-	--theme-color: #ffffff;
-	--theme-color-hover: #ffffff;
-}
-
-.settings {
-	--theme-background: none;
-	--theme-background-hover: none;
-	--theme-color: #be4343;
-	--theme-color-hover: #c25f5f;
+.control-input {
+	--primary-color: var(--main-color);
+	--input-text-color: var(--text-color);
+	--primary-color--hover: none;
 }

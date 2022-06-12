@@ -13,7 +13,7 @@
 		top: 0;
 		padding: 1rem;
 
-		background-color: var(--second-color);
+		background-color: var(--main-color);
 		-webkit-box-shadow: var(--app-shadow);
 		-moz-box-shadow: var(--app-shadow);
 		box-shadow: var(--app-shadow);

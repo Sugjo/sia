@@ -57,7 +57,7 @@
 
 		<div class="account-action">
 			<Button fluid on:click={logout}>Выйти</Button>
-			<Button fluid>Удалить аккаунт</Button>
+			<Button variant="attention" fluid>Удалить аккаунт</Button>
 		</div>
 	</div>
 </DefaultPage>

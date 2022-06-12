@@ -1,10 +1,78 @@
-:root {
-	--text-muted: #858585;
-}
-
 * {
 	box-sizing: border-box;
 }
+
+/* Themes */
+
+:root {
+	--invert: none;
+	--text-muted: #858585;
+	--text-color: #000;
+	--text-color--hover: #9e9e9e;
+	--body-color: #fff;
+	--body-color--hover: #e4e4e4;
+	--main-color: #fff;
+	--primary-color: #de6449;
+	--primary-color--hover: #ec7a60;
+	--input-border: 1px solid #d0d0d0;
+	--input-text-color: #fff;
+	--input-text-color--hover: #fff;
+	--outline: 0 0 0 4px #0000002f;
+	--app-overlay: #292929ce;
+	--app-shadow: 0px 3px 30px -8px #223c504d;
+}
+
+.control-primary {
+	--outline: 0 0 0 4px #de644970;
+}
+
+.control-hidden {
+	--primary-color: none;
+	--primary-color--hover: none;
+	--input-text-color: #a0a0a0;
+	--input-text-color--hover: #c5c5c5;
+}
+
+.control-gray {
+	--primary-color: #8f8f8f;
+	--primary-color--hover: #acacac;
+}
+
+.control-simple {
+	--primary-color: none;
+	--primary-color--hover: none;
+	--input-text-color: var(--text-color);
+	--input-text-color--hover: var(--text-color--hover);
+}
+
+.control-settings {
+	--primary-color: none;
+	--primary-color--hover: none;
+	--input-text-color: #de6449;
+	--input-text-color--hover: #ec7a60;
+}
+
+.control-attention {
+	--primary-color: #d33636;
+	--primary-color--hover: #e24646;
+}
+
+.control-input {
+	--primary-color: #ffffff;
+	--input-text-color: var(--text-color);
+	--border: var(--input-border);
+	--primary-color--hover: none;
+}
+
+.control-error {
+	--primary-color: #ffe2e2;
+	--primary-color--hover: none;
+	--input-text-color: #f93333;
+	--border: 1px #f78a8a solid;
+	--outline: 0 0 0 4px #f9333370;
+}
+
+/* Global style */
 
 html {
 	height: 100%;
@@ -25,33 +93,8 @@ main {
 	padding: 1rem;
 }
 
-.cl-content {
-	overflow-wrap: anywhere;
-	border-radius: 0 0 5px 5px;
-}
-
-.cl-actionbar {
-	border-radius: 5px 5px 0 0;
-}
-
-.cl {
-	border-radius: 5px;
-	width: 300px;
-}
-
-.cl-button:focus {
-	outline: none;
-	box-shadow: 0 0 0 4px #0000002f;
-	border-radius: 5px;
-}
-
-.cl-content:focus {
-	outline: none;
-	box-shadow: 0 0 0 4px #0000002f;
-}
-
 .container {
-	background-color: var(--second-color);
+	background-color: var(--main-color);
 	-webkit-box-shadow: var(--app-shadow);
 	-moz-box-shadow: var(--app-shadow);
 	box-shadow: var(--app-shadow);
@@ -60,23 +103,47 @@ main {
 	border-radius: 5px;
 }
 
-.hidden {
-	--theme-background: none;
-	--theme-background-hover: none;
-	--theme-color: #a0a0a0;
-	--theme-color-hover: #c5c5c5;
+/* Editor */
+
+.cl {
+	border-radius: 5px;
+	width: 300px;
+	box-shadow: none !important;
+	border: var(--input-border);
 }
 
-.primary {
-	--theme-background: #be4343;
-	--theme-background-hover: #c25f5f;
-	--theme-color: #fff;
-	--theme-color-hover: #fff;
+.cl-content {
+	overflow-wrap: anywhere;
+	background-color: var(--main-color) !important;
+	border-radius: 0 0 5px 5px;
 }
 
-.secondary {
-	--theme-background: #acacac;
-	--theme-background-hover: #c4c4c4;
-	--theme-color: #000000;
-	--theme-color-hover: #000000;
+.cl-actionbar {
+	background-color: var(--body-color--hover) !important;
+	border-bottom: var(--input-border) !important;
+	border-radius: 5px 5px 0 0;
+}
+
+.cl-button {
+	fill: var(--text-color) !important;
+	color: var(--text-color) !important;
+}
+
+.cl-button.active {
+	background-color: var(--main-color) !important;
+}
+
+.cl-button:hover {
+	background-color: var(--body-color) !important;
+}
+
+.cl-button:focus {
+	outline: none;
+	box-shadow: var(--outline);
+	border-radius: 5px;
+}
+
+.cl-content:focus {
+	outline: none;
+	box-shadow: var(--outline);
 }

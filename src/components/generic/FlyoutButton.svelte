@@ -66,9 +66,9 @@
 		z-index: 100;
 		border-radius: 5px;
 
-		background: var(--body-color);
+		background: var(--main-color);
 		box-shadow: var(--app-shadow);
-		border: 1px solid var(--second-color);
+		border: 1px solid var(--main-color);
 	}
 
 	.close {

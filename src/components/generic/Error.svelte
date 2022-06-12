@@ -4,12 +4,12 @@
 </script>
 
 {#if error?.type == name}
-	<small class="error-message">{error.message}</small>
+	<small class="error-message control-error">{error.message}</small>
 {/if}
 
 <style>
 	.error-message {
-		color: #f93333;
+		color: var(--input-text-color);
 		margin-bottom: 1rem;
 	}
 </style>
