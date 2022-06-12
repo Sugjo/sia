@@ -35,6 +35,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Группы</title>
+</svelte:head>
+
 <DefaultPage title="Группы">
 	<svelte:fragment slot="header">
 		<ModalButton icon="add" title="Создание группы">

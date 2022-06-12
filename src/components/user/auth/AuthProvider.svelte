@@ -8,7 +8,7 @@
 	onAuthStateChanged(auth, (user) => {
 		if (!browser) return;
 		if (user && $page.routeId?.includes('auth')) return goto('/');
-		if (!user) return goto('/auth/signin');
+		if (!user && !$page.routeId?.includes('auth')) return goto('/auth/signin');
 	});
 </script>
 

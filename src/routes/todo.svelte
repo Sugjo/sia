@@ -78,6 +78,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Задания</title>
+</svelte:head>
+
 <DefaultPage title="Задания">
 	<svelte:fragment slot="header">
 		<ModalButton icon="add" title="Добавить задание">

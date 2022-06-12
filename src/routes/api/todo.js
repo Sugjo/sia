@@ -3,10 +3,10 @@ import { set, ref, push, remove, getDatabase } from 'firebase/database';
 
 const dbref = getDatabase();
 
-export const post = async ({ request }) => {
+export async function post({ request }) {
 	const { uid, name, from, text } = await request.json();
 
-	const [createSuccess, createError] = await handle(
+	const [, error] = await handle(
 		set(push(ref(dbref, 'todo/' + uid)), {
 			uid,
 			name,
@@ -14,25 +14,26 @@ export const post = async ({ request }) => {
 			text
 		})
 	);
-	if (createError) {
+
+	if (error) {
 		return {
 			status: 400,
 			body: {
-				message: `Ошибка: ${createError}`
+				message: `Error: ${error.message}`
 			}
 		};
 	}
+
 	return {
 		status: 200,
 		body: {
-			message: `Задание создано: ${createSuccess}`
+			message: `Task created`
 		}
 	};
-};
+}
 
-export const del = async ({ request }) => {
+export async function del({ request }) {
 	const { id, uid } = await request.json();
-
 	const [delSuccess, delError] = await handle(remove(ref(dbref, `todo/${uid}/${id}`)));
 
 	if (delError) {
@@ -43,10 +44,11 @@ export const del = async ({ request }) => {
 			}
 		};
 	}
+
 	return {
 		status: 200,
 		body: {
 			message: `Задание удалено : ${delSuccess}`
 		}
 	};
-};
+}

@@ -7,7 +7,7 @@
 	export let outlined = false;
 	export let variant = 'primary';
 
-	const variants = ['primary', 'gray', 'hidden', 'simple', 'settings', 'attention'];
+	const variants = ['primary', 'gray', 'hidden', 'simple', 'settings', 'attention', 'link'];
 	if (!variants.includes(variant)) throw 'There is no such variant';
 	const theme = `control-${variant}`;
 </script>
@@ -37,7 +37,8 @@
 {/if}
 
 <style>
-	button {
+	button,
+	a {
 		appearance: none;
 		-webkit-appearance: none;
 		-moz-appearance: none;
@@ -54,17 +55,24 @@
 		transition: 0.2s;
 	}
 
-	button:hover {
+	a {
+		text-decoration: none;
+	}
+
+	button:hover,
+	a:hover {
 		background-color: var(--primary-color--hover);
 		color: var(--input-text-color--hover);
 	}
 
-	button:focus {
+	button:focus,
+	a:focus {
 		outline: none;
 		box-shadow: var(--outline);
 	}
 
-	button:disabled {
+	button:disabled,
+	a:disabled {
 		filter: grayscale(50%);
 		cursor: not-allowed;
 	}
@@ -76,7 +84,8 @@
 		font-size: 17px;
 	}
 
-	button:active .button-body {
+	button:active .button-body,
+	a:active .button-body {
 		position: relative;
 		top: 1px;
 	}

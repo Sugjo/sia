@@ -19,7 +19,8 @@
 	import Error from '$lib/generic/Error.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import Button from '$lib/generic/Button.svelte';
-	
+	import AuthLayout from '$lib/layout/AuthLayout.svelte';
+
 	export let error;
 
 	let email;
@@ -50,82 +51,40 @@
 	<title>С возвращением | Sia HomeWork</title>
 </svelte:head>
 
-<h1>С возвращением в Sia HomeWork 👋</h1>
-<h2>Пристанище ваших домашних заданй</h2>
-
-<GoogleAuth />
-
-<section>
-	<form class="email" on:submit|preventDefault={submitHandler}>
-		<Input
-			label="Email"
-			name="email"
-			inputType="email"
-			placeholder="Введите свой Email"
-			{error}
-			bind:value={email}
-			required
-		/>
-
-		<Input
-			label="Пароль"
-			name="password"
-			inputType="password"
-			placeholder="Введите пароль"
-			{error}
-			bind:value={password}
-			required
-		/>
-
-		<Error {error} name="other" />
-
-		<Button type="submit">Войти</Button>
-	</form>
-	<a class="forgotten-password" href="/auth/reset">Забыли пароль?</a>
-</section>
-
-<p>Нет аккаунта? <a href="/auth/signup">Зарегистрироваться</a></p>
+<AuthLayout on:submit={submitHandler}>
+	<svelte:fragment slot="h1">С возвращением в Sia HomeWork 👋</svelte:fragment>
+	<svelte:fragment slot="h2">Пристанище ваших домашних заданй</svelte:fragment>
+	<GoogleAuth />
+	<Input
+		label="Email"
+		name="email"
+		inputType="email"
+		placeholder="Введите свой Email"
+		{error}
+		bind:value={email}
+		required
+	/>
+	<Input
+		label="Пароль"
+		name="password"
+		inputType="password"
+		placeholder="Введите пароль"
+		{error}
+		bind:value={password}
+		required
+	/>
+	<Button type="submit">Войти</Button>
+	<Error {error} name="other" />
+	<div class="forget-pass">
+		<Button href="/auth/reset" variant="link">Забыли пароль?</Button>
+	</div>
+	<svelte:fragment slot="footer">
+		Нет аккаунта? <Button href="/auth/signup" variant="link">Зарегистрироватся</Button>
+	</svelte:fragment>
+</AuthLayout>
 
 <style>
-	h1,
-	h2 {
-		text-align: center;
-		font-weight: 400;
-	}
-
-	h1 {
-		font-size: 24px;
-		margin: 0;
-	}
-
-	h2 {
-		font-size: 14px;
-		margin-bottom: 2rem;
-	}
-
-	a {
-		text-decoration: none;
-	}
-	.email {
+	.forget-pass {
 		display: flex;
-		flex-direction: column;
-	}
-
-	section,
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.forgotten-password {
-		opacity: 0.8;
-		font-size: 14px;
-	}
-
-	p {
-		opacity: 0.8;
-		margin-top: 2rem;
-		text-align: center;
 	}
 </style>

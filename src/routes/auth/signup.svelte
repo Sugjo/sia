@@ -3,6 +3,8 @@
 	import Button from '$lib/generic/Button.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import { register } from '$lib/user/auth/auth';
+	import AuthLayout from '$lib/layout/AuthLayout.svelte';
+	import Error from '$lib/generic/Error.svelte';
 
 	let email;
 	let password;
@@ -33,12 +35,10 @@
 	<title>Добро пожаловать | Sia HomeWork</title>
 </svelte:head>
 
-<h1>Добро пожаловать в Sia HomeWork 👋</h1>
-<h2>Пристанище ваших домашних заданй</h2>
-
-<GoogleAuth />
-
-<form class="email" on:submit|preventDefault={submitHandler}>
+<AuthLayout on:submit={submitHandler}>
+	<svelte:fragment slot="h1">Добро пожаловать в Sia HomeWork 👋</svelte:fragment>
+	<svelte:fragment slot="h2">Пристанище ваших домашних заданй</svelte:fragment>
+	<GoogleAuth />
 	<Input
 		label="Email"
 		name="email"
@@ -48,7 +48,6 @@
 		bind:value={email}
 		required
 	/>
-
 	<Input
 		label="Пароль"
 		name="password"
@@ -58,46 +57,8 @@
 		bind:value={password}
 		required
 	/>
-
 	<Button type="submit">Зарегистрироваться</Button>
-</form>
-
-<p>Есть аккаунт? <a href="/auth/signin">Войти</a></p>
-
-<style>
-	h1,
-	h2 {
-		text-align: center;
-		font-weight: 400;
-	}
-
-	h1 {
-		font-size: 24px;
-		margin: 0;
-	}
-
-	h2 {
-		font-size: 14px;
-		margin-bottom: 2rem;
-	}
-
-	a {
-		text-decoration: none;
-	}
-	.email {
-		display: flex;
-		flex-direction: column;
-	}
-
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	p {
-		opacity: 0.8;
-		margin-top: 2rem;
-		text-align: center;
-	}
-</style>
+	<svelte:fragment slot="footer">
+		Есть аккаунт? <Button href="/auth/signin" variant="link">Войти</Button>
+	</svelte:fragment>
+</AuthLayout>

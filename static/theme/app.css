@@ -57,6 +57,13 @@
 	--primary-color--hover: #e24646;
 }
 
+.control-link {
+	--primary-color: none;
+	--primary-color--hover: none;
+	--input-text-color: #6C5588;
+	--input-text-color--hover: #8d78a7;
+}
+
 .control-input {
 	--primary-color: #ffffff;
 	--input-text-color: var(--text-color);

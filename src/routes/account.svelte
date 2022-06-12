@@ -19,6 +19,10 @@
 	const lightThemeHandler = () => ($settings.theme = 'light');
 </script>
 
+<svelte:head>
+	<title>Аккаунт</title>
+</svelte:head>
+
 <DefaultPage title="Аккаунт">
 	<div class="settings">
 		<div class="settings-item">
@@ -54,7 +58,6 @@
 			<Button fluid variant="settings">Изменить</Button>
 		</div>
 		<Hr />
-
 		<div class="account-action">
 			<Button fluid on:click={logout}>Выйти</Button>
 			<Button variant="attention" fluid>Удалить аккаунт</Button>

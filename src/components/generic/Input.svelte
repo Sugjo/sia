@@ -19,7 +19,7 @@
 	let inputElement;
 	let eltId = 'input_' + counter++;
 
-	$: isError = error?.type == name && error?.message;
+	$: isError = error?.input == name && error?.message;
 	$: if (browser && isFocus) inputElement?.focus();
 
 	onMount(() => {
