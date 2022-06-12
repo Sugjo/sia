@@ -7,7 +7,7 @@
 	export let outlined = false;
 	export let variant = 'primary';
 
-	const variants = ['primary', 'gray', 'hidden', 'simple', 'settings', "attention"];
+	const variants = ['primary', 'gray', 'hidden', 'simple', 'settings', 'attention'];
 	if (!variants.includes(variant)) throw 'There is no such variant';
 	const theme = `control-${variant}`;
 </script>

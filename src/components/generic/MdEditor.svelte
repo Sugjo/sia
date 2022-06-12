@@ -10,12 +10,7 @@
 		'ol',
 		'ul',
 		'hr',
-		'left',
-		'right',
-		'center',
-		'justify',
 		'a',
-		'image',
 		'removeFormat'
 	];
 </script>

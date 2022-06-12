@@ -68,7 +68,7 @@
 
 		background: var(--main-color);
 		box-shadow: var(--app-shadow);
-		border: 1px solid var(--main-color);
+		border: var(--input-border);
 	}
 
 	.close {
