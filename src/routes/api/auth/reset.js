@@ -27,7 +27,7 @@ export async function post({ request }) {
 	return {
 		status: 200,
 		body: {
-			message: `Reset message successfully sended`
+			message: `Письмо сброса пароля успешно отправлено`
 		}
 	};
 }

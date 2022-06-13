@@ -1,25 +1,12 @@
-<script context="module">
-	import { getRedirectResult } from 'firebase/auth';
-	import { auth } from '$lib/tools/firebase';
-	import { handle } from '$lib/tools/handle';
-
-	export const load = async () => {
-		let [redirectHandler, redirectError] = await handle(getRedirectResult(auth));
-
-		return {
-			props: {
-				error: redirectError || ''
-			}
-		};
-	};
-</script>
-
 <script>
 	import GoogleAuth from '$lib/user/auth/GoogleAuth.svelte';
 	import Error from '$lib/generic/Error.svelte';
 	import Input from '$lib/generic/Input.svelte';
 	import Button from '$lib/generic/Button.svelte';
 	import AuthLayout from '$lib/layout/AuthLayout.svelte';
+	import { handle } from '$lib/tools/handle';
+	import { signInWithEmailAndPassword } from 'firebase/auth';
+	import { auth } from '$lib/tools/firebase';
 
 	export let error;
 
@@ -27,23 +14,7 @@
 	let password;
 
 	const submitHandler = async () => {
-		try {
-			const res = await fetch('/auth/signin', {
-				method: 'POST',
-				body: JSON.stringify({
-					email,
-					password
-				}),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-
-			if (res.ok) {
-			}
-		} catch (err) {
-			error = err;
-		}
+		const [, error] = await handle(signInWithEmailAndPassword(auth, email, password));
 	};
 </script>
 

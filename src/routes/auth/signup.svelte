@@ -2,7 +2,6 @@
 	import GoogleAuth from '$lib/user/auth/GoogleAuth.svelte';
 	import Button from '$lib/generic/Button.svelte';
 	import Input from '$lib/generic/Input.svelte';
-	import { register } from '$lib/user/auth/auth';
 	import AuthLayout from '$lib/layout/AuthLayout.svelte';
 	import Error from '$lib/generic/Error.svelte';
 
@@ -11,22 +10,18 @@
 	let error;
 
 	const submitHandler = async () => {
-		try {
-			const res = await fetch('/auth/signup', {
-				method: 'POST',
-				body: JSON.stringify({
-					email,
-					password
-				}),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
+		const res = await fetch('/api/auth/signup', {
+			method: 'POST',
+			body: JSON.stringify({
+				email,
+				password
+			})
+		});
 
-			if (res.ok) {
-			}
-		} catch (err) {
-			error = err;
+		if (res.ok) {
+			//TODO сделать сообщение об успешной регистрации
+		} else {
+			error = await res.json();
 		}
 	};
 </script>
@@ -58,6 +53,7 @@
 		required
 	/>
 	<Button type="submit">Зарегистрироваться</Button>
+	<Error {error} name="other" />
 	<svelte:fragment slot="footer">
 		Есть аккаунт? <Button href="/auth/signin" variant="link">Войти</Button>
 	</svelte:fragment>
