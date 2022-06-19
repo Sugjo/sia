@@ -3,6 +3,7 @@
 	import Button from '$lib/generic/Button.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
 	import ModalButton from '$lib/generic/ModalButton.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	export let id;
 	export let name;
@@ -11,7 +12,21 @@
 	export let isChecked = false;
 
 	let isExpanded = false;
-	const checkHandler = () => (isChecked = !isChecked);
+
+	const checkHandler = async () => {
+		auth.onAuthStateChanged(async (user) => {
+			if (!user?.uid) return;
+			const check = await fetch('/api/todo/check', {
+				method: 'POST',
+				body: JSON.stringify({ uid: user.uid, id })
+			});
+
+			if (check.ok) {
+				const checkState = await check.json();
+				isChecked = checkState.message;
+			}
+		});
+	};
 	const showMore = () => (isExpanded = !isExpanded);
 	const del = async () => {
 		if (!auth.currentUser) logout();

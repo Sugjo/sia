@@ -1,18 +1,40 @@
 <script context="module">
-	import { auth } from '$lib/tools/firebase';
+	import { auth, db } from '$lib/tools/firebase';
 	import { getDatabase, onValue } from 'firebase/database';
 	import { ref } from 'firebase/database';
+	import { doc, getDoc } from 'firebase/firestore';
 
 	export const load = async () => {
 		return {
 			props: {
-				todoCb: function (cb = (e) => {}) {
-					auth.onAuthStateChanged((user) => {
+				getTodos: function (cb = () => {}) {
+					auth.onAuthStateChanged(async (user) => {
 						if (!user?.uid) return;
-						const todoRef = ref(getDatabase(), 'todo/' + user?.uid);
-						onValue(todoRef, (todoData) => {
-							const data = todoData.val();
-							cb(data);
+
+						const userRef = await getDoc(doc(db, 'users', user.uid));
+						const todoRef = ref(getDatabase(), 'todo/');
+						let todosID = [user.uid];
+
+						for await (const group of userRef.data().groups) {
+							todosID.push(group.id);
+						}
+
+						console.log(userRef.data());
+
+						onValue(todoRef, async (todosData) => {
+							let allTodosData;
+
+							for await (const todoID of todosID) {
+								const todoData = todosData.child(todoID).val();
+								allTodosData = { ...allTodosData, ...todoData };
+							}
+
+							cb(
+								Object.keys(allTodosData).map((key) => {
+									console.log(allTodosData[key]);
+									return { id: key, ...allTodosData[key] };
+								})
+							);
 						});
 					});
 				}
@@ -25,7 +47,6 @@
 	import Button from '$lib/generic/Button.svelte';
 	import TodoCard from '$lib/cards/TodoCard.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
-	import Hr from '$lib/generic/Hr.svelte';
 	import ModalButton from '$lib/generic/ModalButton.svelte';
 	import MdEditor from '$lib/generic/MdEditor.svelte';
 	import Input from '$lib/generic/Input.svelte';
@@ -36,16 +57,7 @@
 
 	//Get ToDo data
 
-	export let todoCb;
-
-	todoCb((e) => {
-		if (e) {
-			todoData = Object.keys(e).map((key) => {
-				return { id: key, ...e[key] };
-			});
-		}
-		isLoad = false;
-	});
+	export let getTodos;
 
 	let todoData;
 
@@ -56,16 +68,23 @@
 	let isLoad = true;
 	let canSubmit = true;
 
-	const createTodo = async () => {
+	getTodos((e) => {
+		if (e) {
+			todoData = e;
+		}
+		isLoad = false;
+	});
+
+	const createTodo = async (id) => {
 		if (!auth.currentUser) return;
 		canSubmit = false;
 		await fetch('/api/todo', {
 			method: 'POST',
 			body: JSON.stringify({
-				uid: auth.currentUser.uid,
+				id: auth.currentUser.uid,
 				name,
 				from,
-				text
+				text: text || null
 			})
 		});
 		canSubmit = true;
@@ -87,6 +106,12 @@
 		<ModalButton icon="add" title="Добавить задание">
 			<ModalForm on:submit={createTodo}>
 				<Input bind:value={name} label="Название задания" isFocus required />
+				<FlyoutButton fluid>
+					<svelte:fragment slot="button">Все</svelte:fragment>
+					<Button fluid variant="simple" on:click={createTodo}>Все</Button>
+					<Button fluid variant="simple">Личные</Button>
+					<Button fluid variant="simple">Из групп</Button>
+				</FlyoutButton>
 				<MdEditor on:change={(e) => (text = e.detail)} />
 				<svelte:fragment slot="buttons">
 					<Button on:click={closeModalHandler} variant="gray" fluid>Отмена</Button>
@@ -99,9 +124,7 @@
 	<FlyoutButton fluid>
 		<svelte:fragment slot="button">Все</svelte:fragment>
 		<Button fluid variant="simple" on:click={createTodo}>Все</Button>
-		<Hr />
 		<Button fluid variant="simple">Личные</Button>
-		<Hr />
 		<Button fluid variant="simple">Из групп</Button>
 	</FlyoutButton>
 
