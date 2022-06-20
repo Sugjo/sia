@@ -19,8 +19,6 @@
 							todosID.push(group.id);
 						}
 
-						console.log(userRef.data());
-
 						onValue(todoRef, async (todosData) => {
 							let allTodosData;
 
@@ -31,8 +29,11 @@
 
 							cb(
 								Object.keys(allTodosData).map((key) => {
-									console.log(allTodosData[key]);
-									return { id: key, ...allTodosData[key] };
+									return {
+										id: key,
+										...allTodosData[key],
+										isChecked: userRef.data().checks.includes(key)
+									};
 								})
 							);
 						});
@@ -71,6 +72,7 @@
 	getTodos((e) => {
 		if (e) {
 			todoData = e;
+			console.log(todoData);
 		}
 		isLoad = false;
 	});

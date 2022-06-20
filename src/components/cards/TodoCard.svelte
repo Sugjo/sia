@@ -18,7 +18,7 @@
 			if (!user?.uid) return;
 			const check = await fetch('/api/todo/check', {
 				method: 'POST',
-				body: JSON.stringify({ uid: user.uid, id })
+				body: JSON.stringify({ uid: user.uid, checkId: id })
 			});
 
 			if (check.ok) {
@@ -27,14 +27,17 @@
 			}
 		});
 	};
+
 	const showMore = () => (isExpanded = !isExpanded);
+
 	const del = async () => {
-		if (!auth.currentUser) logout();
-		let req = await fetch('/api/todo', {
-			method: 'DELETE',
-			body: JSON.stringify({ id, uid: auth.currentUser.uid })
+		auth.onAuthStateChanged(async (user) => {
+			if (!user?.uid) return;
+			let req = await fetch('/api/todo', {
+				method: 'DELETE',
+				body: JSON.stringify({ id, uid: user.uid })
+			});
 		});
-		return req;
 	};
 </script>
 

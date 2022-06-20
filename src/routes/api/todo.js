@@ -4,11 +4,11 @@ import { set, ref, push, remove, getDatabase } from 'firebase/database';
 const dbref = getDatabase();
 
 export async function post({ request }) {
-	const { uid, name, from, text } = await request.json();
+	const { id, name, from, text } = await request.json();
 
 	const [, error] = await handle(
-		set(push(ref(dbref, 'todo/' + uid)), {
-			uid,
+		set(push(ref(dbref, 'todo/' + id)), {
+			id,
 			name,
 			from,
 			text
