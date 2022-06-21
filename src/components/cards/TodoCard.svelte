@@ -44,7 +44,7 @@
 	};
 </script>
 
-<div class="card">
+<div class="card" class:isChecked>
 	<div class="check" on:click={checkHandler}>
 		{#if isChecked}
 			<span class="material-icons-outlined"> check_box </span>
@@ -52,7 +52,7 @@
 			<span class="material-icons-outlined"> check_box_outline_blank </span>
 		{/if}
 	</div>
-	<div class="card-body" class:isChecked>
+	<div class="card-body">
 		<div class="body-title">
 			{name} из <span>{from}</span>
 		</div>
@@ -107,8 +107,12 @@
 		overflow-wrap: anywhere;
 	}
 
-	.isChecked {
+	.isChecked .card-body {
 		text-decoration: line-through;
+	}
+
+	.isChecked {
+		opacity: .7;
 	}
 
 	.close {

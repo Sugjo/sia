@@ -13,8 +13,10 @@
 				const todoRef = ref(getDatabase(), 'todo/');
 				let placesId = [user.uid];
 
-				for await (const group of userRef.data().groups) {
-					placesId.push(group.id);
+				if (userRef.data()?.groups) {
+					for await (const group of userRef.data().groups) {
+						placesId.push(group.id);
+					}
 				}
 
 				onValue(todoRef, async (todosData) => {
@@ -22,6 +24,7 @@
 
 					for await (const placeId of placesId) {
 						let todoData = todosData.child(placeId).val();
+						if (!todoData) continue;
 						Object.keys(todoData).map((key) => {
 							todoData[key]['placeId'] = placeId;
 						});
@@ -29,12 +32,14 @@
 					}
 
 					cb(
-						Object.keys(allTodosData).map((key) => {
-							return {
-								id: key,
-								...allTodosData[key]
-							};
-						})
+						allTodosData
+							? Object.keys(allTodosData).map((key) => {
+									return {
+										id: key,
+										...allTodosData[key]
+									};
+							  })
+							: null
 					);
 				});
 			});

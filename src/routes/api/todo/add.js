@@ -6,7 +6,7 @@ export async function post({ request }) {
 
     const [, error] = await handle(
         set(push(ref(getDatabase(), 'todo/' + placeId)), {
-            id,
+            placeId,
             name,
             from,
             text

@@ -21,7 +21,7 @@
 
 	.buttons {
 		display: flex;
-		margin-top: 3rem;
+		margin-top: 2rem;
 		gap: 0.5rem;
 		width: 100%;
 	}

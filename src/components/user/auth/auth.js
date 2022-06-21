@@ -40,13 +40,6 @@ export const register = async (email, password) => {
 	}
 };
 
-export const logout = () => {
-	//✔
-	signOut(auth);
-	settingsToDefault();
-	userToDefault();
-};
-
 export const googleAuth = async () => {
 	try {
 		let res = await signInWithRedirect(auth, provider);

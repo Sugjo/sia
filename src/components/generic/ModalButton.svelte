@@ -10,6 +10,7 @@
 	export let isOpen = false;
 	export let disabled = false;
 	export let outlined = false;
+	export let mini = false;
 	export let variant = 'primary';
 
 	const settings = getContext('settings');
@@ -39,6 +40,7 @@
 			out:fly={{ duration: 300, y: 500 }}
 			on:click|stopPropagation
 			class="modal-dialog {$settings?.deviceType}"
+			class:mini
 		>
 			<div class="modal-header">
 				<div class="modal-title">{title}</div>
@@ -90,6 +92,13 @@
 		background-color: var(--body-color);
 	}
 
+	.mini {
+		width: auto;
+		height: auto;
+		min-width: 70%;
+		border-radius: 5px;
+	}
+
 	.dragable-line {
 		display: flex;
 		justify-content: center;
@@ -109,5 +118,13 @@
 		right: 0;
 		background-color: var(--app-overlay);
 		z-index: 100;
+	}
+
+	@media (max-width: 800px) {
+		.mini {
+			width: 100%;
+			height: 100%;
+			border-radius: 0px;
+		}
 	}
 </style>
