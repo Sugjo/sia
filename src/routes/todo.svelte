@@ -5,40 +5,44 @@
 	import { doc, getDoc } from 'firebase/firestore';
 
 	export const load = async () => {
+		function getTodos(cb = () => {}) {
+			auth.onAuthStateChanged(async (user) => {
+				if (!user?.uid) return;
+
+				const userRef = await getDoc(doc(db, 'users', user.uid));
+				const todoRef = ref(getDatabase(), 'todo/');
+				let placesId = [user.uid];
+
+				for await (const group of userRef.data().groups) {
+					placesId.push(group.id);
+				}
+
+				onValue(todoRef, async (todosData) => {
+					let allTodosData;
+
+					for await (const placeId of placesId) {
+						let todoData = todosData.child(placeId).val();
+						Object.keys(todoData).map((key) => {
+							todoData[key]['placeId'] = placeId;
+						});
+						allTodosData = { ...allTodosData, ...todoData };
+					}
+
+					cb(
+						Object.keys(allTodosData).map((key) => {
+							return {
+								id: key,
+								...allTodosData[key]
+							};
+						})
+					);
+				});
+			});
+		}
+
 		return {
 			props: {
-				getTodos: function (cb = () => {}) {
-					auth.onAuthStateChanged(async (user) => {
-						if (!user?.uid) return;
-
-						const userRef = await getDoc(doc(db, 'users', user.uid));
-						const todoRef = ref(getDatabase(), 'todo/');
-						let todosID = [user.uid];
-
-						for await (const group of userRef.data().groups) {
-							todosID.push(group.id);
-						}
-
-						onValue(todoRef, async (todosData) => {
-							let allTodosData;
-
-							for await (const todoID of todosID) {
-								const todoData = todosData.child(todoID).val();
-								allTodosData = { ...allTodosData, ...todoData };
-							}
-
-							cb(
-								Object.keys(allTodosData).map((key) => {
-									return {
-										id: key,
-										...allTodosData[key],
-										isChecked: userRef.data().checks.includes(key)
-									};
-								})
-							);
-						});
-					});
-				}
+				getTodos
 			}
 		};
 	};
@@ -70,17 +74,14 @@
 	let canSubmit = true;
 
 	getTodos((e) => {
-		if (e) {
-			todoData = e;
-			console.log(todoData);
-		}
+		if (e) todoData = e;
 		isLoad = false;
 	});
 
-	const createTodo = async (id) => {
+	const createTodoHandler = async (id) => {
 		if (!auth.currentUser) return;
 		canSubmit = false;
-		await fetch('/api/todo', {
+		await fetch('/api/todo/add', {
 			method: 'POST',
 			body: JSON.stringify({
 				id: auth.currentUser.uid,
@@ -106,11 +107,11 @@
 <DefaultPage title="Задания">
 	<svelte:fragment slot="header">
 		<ModalButton icon="add" title="Добавить задание">
-			<ModalForm on:submit={createTodo}>
+			<ModalForm on:submit={createTodoHandler}>
 				<Input bind:value={name} label="Название задания" isFocus required />
 				<FlyoutButton fluid>
 					<svelte:fragment slot="button">Все</svelte:fragment>
-					<Button fluid variant="simple" on:click={createTodo}>Все</Button>
+					<Button fluid variant="simple">Все</Button>
 					<Button fluid variant="simple">Личные</Button>
 					<Button fluid variant="simple">Из групп</Button>
 				</FlyoutButton>
@@ -125,15 +126,15 @@
 
 	<FlyoutButton fluid>
 		<svelte:fragment slot="button">Все</svelte:fragment>
-		<Button fluid variant="simple" on:click={createTodo}>Все</Button>
+		<Button fluid variant="simple">Все</Button>
 		<Button fluid variant="simple">Личные</Button>
 		<Button fluid variant="simple">Из групп</Button>
 	</FlyoutButton>
 
 	<div class="content">
 		<DataOrMessage {isLoad} data={todoData} message="Заданий нет!">
-			{#each todoData as { id, name, from, text, isChecked }}
-				<TodoCard {id} {name} {from} {text} {isChecked} />
+			{#each todoData as { id, name, from, text, checkedData, placeId }}
+				<TodoCard {id} {name} {from} {text} {checkedData} {placeId} />
 			{/each}
 		</DataOrMessage>
 	</div>

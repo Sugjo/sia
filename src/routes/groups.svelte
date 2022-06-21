@@ -19,7 +19,6 @@
 	let name;
 	let imgUrl;
 
-	$: console.log(groupsData);
 	const closeModalHandler = () => {
 		name = null;
 		imgUrl = null;

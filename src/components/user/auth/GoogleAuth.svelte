@@ -4,7 +4,7 @@
 	let error;
 </script>
 
-<button class="button-google" on:click={googleAuth}>
+<button type="button" class="button-google" on:click={googleAuth}>
 	<img src="/img/google.png" alt="" width="15" height="15" /> Продолжить с помощю Google
 </button>
 {#if error}

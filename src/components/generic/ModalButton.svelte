@@ -16,7 +16,6 @@
 	const dispatch = createEventDispatcher();
 
 	$: if ($settings.closeModal == true) {
-		console.log('close');
 		$settings.closeModal = false;
 		closeModal();
 	}

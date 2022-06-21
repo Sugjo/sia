@@ -6,10 +6,13 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let id;
+	export let placeId;
 	export let name;
 	export let from;
 	export let text;
-	export let isChecked = false;
+	export let checkedData = [];
+
+	$: isChecked = checkedData?.includes(auth.currentUser.uid)
 
 	let isExpanded = false;
 
@@ -18,22 +21,22 @@
 			if (!user?.uid) return;
 			const check = await fetch('/api/todo/check', {
 				method: 'POST',
-				body: JSON.stringify({ uid: user.uid, checkId: id })
+				body: JSON.stringify({ uid: user.uid, path: `todo/${placeId}/${id}` })
 			});
 
 			if (check.ok) {
 				const checkState = await check.json();
-				isChecked = checkState.message;
+				checkedData = checkState.message;
 			}
 		});
 	};
 
 	const showMore = () => (isExpanded = !isExpanded);
 
-	const del = async () => {
+	const deleteHandler = async () => {
 		auth.onAuthStateChanged(async (user) => {
 			if (!user?.uid) return;
-			let req = await fetch('/api/todo', {
+			fetch('/api/todo/delete', {
 				method: 'DELETE',
 				body: JSON.stringify({ id, uid: user.uid })
 			});
@@ -66,7 +69,7 @@
 
 	<FlyoutButton position="left" icon="more_horiz" variant="hidden">
 		<Button variant="simple" fluid>Изменить</Button>
-		<Button on:click={del} variant="simple" fluid>Удалить</Button>
+		<Button on:click={deleteHandler} variant="simple" fluid>Удалить</Button>
 	</FlyoutButton>
 </div>
 

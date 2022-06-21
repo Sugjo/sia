@@ -15,6 +15,7 @@
 			method: 'DELETE',
 			body: JSON.stringify({ id, uid: auth.currentUser.uid })
 		});
+		//TODO переделать
 	};
 </script>
 
