@@ -14,16 +14,19 @@
 	let password;
 
 	const submitHandler = async () => {
-		const res = await fetch('/api/auth/signin', {
-			method: 'POST',
-			body: JSON.stringify({
-				email,
-				password
-			})
-		});
+		const [, e] = await handle(signInWithEmailAndPassword(auth, email, password));
 
-		if (!res.ok) {
-			error = await res.json();
+		const errorMessages = {
+			'auth/invalid-email': { input: 'email', message: 'Введите существующий Email' },
+			'auth/user-not-found': { input: 'other', message: 'Неверный логин или пароль' },
+			'auth/wrong-password': { input: 'other', message: 'Неверный логин или пароль' }
+		}; //TODO добавить корректные сообщения
+
+		if (e) {
+			error = errorMessages[e.code] || {
+				input: 'other',
+				message: e.message
+			};
 		}
 	};
 </script>
