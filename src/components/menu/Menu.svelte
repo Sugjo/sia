@@ -60,6 +60,7 @@
 		bottom: 0;
 		left: 0;
 		text-align: center;
+		z-index: 12;
 	}
 
 	.desktop {

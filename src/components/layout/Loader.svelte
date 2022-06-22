@@ -32,7 +32,7 @@
 		justify-content: center;
 		flex-direction: column;
 		align-items: center;
-		z-index: 10;
+		z-index: 60;
 		width: 100%;
 		height: 100%;
 	}

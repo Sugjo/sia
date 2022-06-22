@@ -4,7 +4,7 @@ const settingsData = {
 	theme: 'light',
 	homepage: '/todo',
 	deviceType: 'mobile',
-	closeModal: false
+	closeModal: false,
 };
 
 export const settings = writable('settings', settingsData);

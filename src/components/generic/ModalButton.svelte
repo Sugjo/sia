@@ -80,7 +80,6 @@
 		background-color: var(--main-color);
 		box-shadow: var(--app-shadow);
 		width: 100%;
-		z-index: 100;
 	}
 
 	.modal-dialog {
@@ -111,13 +110,13 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
+		opacity: 1;
+		z-index: 100;
 		top: 0;
 		bottom: 0;
 		left: 0;
 		right: 0;
 		background-color: var(--app-overlay);
-		z-index: 100;
 	}
 
 	@media (max-width: 800px) {

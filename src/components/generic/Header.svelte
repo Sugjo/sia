@@ -12,6 +12,7 @@
 		position: sticky;
 		top: 0;
 		padding: 1rem;
+		z-index: 12;
 
 		background-color: var(--main-color);
 		-webkit-box-shadow: var(--app-shadow);
