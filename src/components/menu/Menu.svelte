@@ -10,11 +10,11 @@
 			icon: 'checklist',
 			href: '/todo'
 		},
-		{
-			title: 'Группы',
-			icon: 'group',
-			href: '/groups'
-		},
+		// {
+		// 	title: 'Группы',
+		// 	icon: 'group',
+		// 	href: '/groups'
+		// },
 		// {
 		// 	title: 'Чат',
 		// 	icon: 'chat_bubble_outline',
@@ -22,16 +22,15 @@
 		// },
 		{
 			title: 'Аккаунт',
-			flyout: true,
 			icon: 'account_circle',
 			href: '/account'
 		},
 
-		{
-			title: 'Тесты',
-			icon: 'science',
-			href: '/test'
-		}
+		// {
+		// 	title: 'Тесты',
+		// 	icon: 'science',
+		// 	href: '/test'
+		// }
 	];
 </script>
 

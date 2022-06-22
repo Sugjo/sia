@@ -32,11 +32,9 @@
 	<div class="card-footer">
 		<FlyoutButton position="left" icon="more_horiz" variant="hidden">
 			{#if !prewiew}
-				<Button variant="simple" fluid>Изменить</Button>
 				<Button on:click={delGroupOnUser} variant="simple" fluid>Выйти</Button>
 			{:else}
-				<Button variant="simple" fluid>Изменить</Button>
-				<Button variant="simple" fluid>Выйти</Button>
+				<Button disabled variant="simple" fluid>Выйти</Button>
 			{/if}
 		</FlyoutButton>
 	</div>

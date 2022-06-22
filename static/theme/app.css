@@ -13,6 +13,8 @@
 	--body-color--hover: #e4e4e4;
 	--main-color: #fff;
 	--primary-color: #de6449;
+	--error-color: #f93333;
+	--success-color: green;
 	--primary-color--hover: #ec7a60;
 	--input-border: 1px solid #d0d0d0;
 	--input-text-color: #fff;
@@ -60,7 +62,7 @@
 .control-link {
 	--primary-color: none;
 	--primary-color--hover: none;
-	--input-text-color: #6C5588;
+	--input-text-color: #6c5588;
 	--input-text-color--hover: #8d78a7;
 }
 

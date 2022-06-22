@@ -3,6 +3,8 @@
 	import Editor from 'cl-editor/src/Editor.svelte';
 	import MdEditor from '$lib/generic/MdEditor.svelte';
 	import ModalButton from '$lib/generic/ModalButton.svelte';
+	import Button from '$lib/generic/Button.svelte';
+	import { closeAllModal } from '$lib/tools/closeAllModal';
 
 	let email;
 	let error = {
@@ -27,5 +29,12 @@
 	<ModalButton icon="add">
 		<svelte:fragment slot="title">Добавить задание</svelte:fragment>
 		<MdEditor />
+		<Button on:click={closeAllModal}>Закрыть</Button>
+	</ModalButton>
+
+	<ModalButton icon="add">
+		<svelte:fragment slot="title">Добавить задание</svelte:fragment>
+		<MdEditor />
+		<Button on:click={closeAllModal}>Закрыть</Button>
 	</ModalButton>
 </section>

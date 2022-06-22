@@ -6,10 +6,9 @@
 	import { goto } from '$app/navigation';
 
 	onAuthStateChanged(auth, (user) => {
-		if (!auth) return;
 		if (!browser) return;
-		if (user && $page.routeId?.includes('auth')) return goto('/');
 		if (!user && !$page.routeId?.includes('auth')) return goto('/auth/signin');
+		if (user && $page.routeId?.includes('auth')) return goto('/');
 	});
 </script>
 

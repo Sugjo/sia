@@ -2,11 +2,6 @@
 	import { auth } from '$lib/tools/firebase';
 	import Button from '$lib/generic/Button.svelte';
 	import FlyoutButton from '$lib/generic/FlyoutButton.svelte';
-	import ModalButton from '$lib/generic/ModalButton.svelte';
-	import { onDestroy } from 'svelte';
-	import Input from '$lib/generic/Input.svelte';
-	import ModalForm from '$lib/layout/ModalForm.svelte';
-	import MdEditor from '$lib/generic/MdEditor.svelte';
 
 	export let id;
 	export let placeId;
@@ -18,7 +13,6 @@
 	$: isChecked = checkedData?.includes(auth.currentUser.uid);
 
 	let isExpanded = false;
-	let flyout;
 
 	const checkHandler = async () => {
 		auth.onAuthStateChanged(async (user) => {
@@ -71,24 +65,7 @@
 		fluid={false}
 	/>
 
-	<FlyoutButton position="left" icon="more_horiz" variant="hidden" bind:this={flyout}>
-		<ModalButton title="Изменение задания" variant="simple" fluid>
-			<svelte:fragment slot="button">Изменить</svelte:fragment>
-			<ModalForm on:submit>
-				<Input bind:value={name} label="Название задания" isFocus required />
-				<FlyoutButton fluid>
-					<svelte:fragment slot="button">Все</svelte:fragment>
-					<Button fluid variant="simple">Все</Button>
-					<Button fluid variant="simple">Личные</Button>
-					<Button fluid variant="simple">Из групп</Button>
-				</FlyoutButton>
-				<MdEditor on:change={(e) => (text = e.detail)} />
-				<svelte:fragment slot="buttons">
-					<Button variant="gray" fluid>Отмена</Button>
-					<Button type="submit" fluid>Изменить</Button>
-				</svelte:fragment>
-			</ModalForm>
-		</ModalButton>
+	<FlyoutButton position="left" icon="more_horiz" variant="hidden">
 		<Button on:click={deleteHandler} variant="simple" fluid>Удалить</Button>
 	</FlyoutButton>
 </div>

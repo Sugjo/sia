@@ -5,5 +5,5 @@
 	
 	const settings = getContext('settings');
 
-	if (browser) goto($settings.homepage || '/home');
+	if (browser) goto($settings.homepage || '/todo');
 </script>

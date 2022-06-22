@@ -114,12 +114,12 @@
 		<ModalButton icon="add" title="Добавить задание">
 			<ModalForm on:submit={createTodoHandler}>
 				<Input bind:value={name} label="Название задания" isFocus required />
-				<FlyoutButton fluid>
+				<!-- <FlyoutButton fluid>
 					<svelte:fragment slot="button">Все</svelte:fragment>
 					<Button fluid variant="simple">Все</Button>
 					<Button fluid variant="simple">Личные</Button>
 					<Button fluid variant="simple">Из групп</Button>
-				</FlyoutButton>
+				</FlyoutButton> -->
 				<MdEditor on:change={(e) => (text = e.detail)} />
 				<svelte:fragment slot="buttons">
 					<Button on:click={closeModalHandler} variant="gray" fluid>Отмена</Button>
@@ -129,12 +129,12 @@
 		</ModalButton>
 	</svelte:fragment>
 
-	<FlyoutButton fluid>
+	<!-- <FlyoutButton fluid>
 		<svelte:fragment slot="button">Все</svelte:fragment>
 		<Button fluid variant="simple">Все</Button>
 		<Button fluid variant="simple">Личные</Button>
 		<Button fluid variant="simple">Из групп</Button>
-	</FlyoutButton>
+	</FlyoutButton> -->
 
 	<div class="content">
 		<DataOrMessage {isLoad} data={todoData} message="Заданий нет!">

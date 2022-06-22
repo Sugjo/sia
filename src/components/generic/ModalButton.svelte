@@ -13,6 +13,8 @@
 	export let mini = false;
 	export let variant = 'primary';
 
+	let modal;
+
 	const settings = getContext('settings');
 	const dispatch = createEventDispatcher();
 
@@ -24,17 +26,24 @@
 	const closeModal = () => {
 		isOpen = false;
 		browser && (document.body.style = null);
-		dispatch('open');
+		dispatch('close');
 	};
 	const openModal = () => {
 		isOpen = true;
 		browser && (document.body.style.overflow = 'hidden');
-		dispatch('close');
+		dispatch('open');
 	};
 </script>
 
 {#if isOpen}
-	<div in:fade={{ duration: 300 }} out:fade={{ duration: 300 }} on:click={closeModal} class="modal">
+	<div
+		in:fade={{ duration: 300 }}
+		out:fade={{ duration: 300 }}
+		on:click={closeModal}
+		class="modal"
+		style="display:{isOpen ? 'flex' : 'none'}"
+		bind:this={modal}
+	>
 		<div
 			in:fly={{ duration: 300, y: 500 }}
 			out:fly={{ duration: 300, y: 500 }}

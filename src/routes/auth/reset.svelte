@@ -3,10 +3,13 @@
 	import Input from '$lib/generic/Input.svelte';
 	import Error from '$lib/generic/Error.svelte';
 	import AuthLayout from '$lib/layout/AuthLayout.svelte';
+	import SplashMessage from '$lib/layout/splashMessage.svelte';
+import { goto } from '$app/navigation';
 
 	let email;
 	let error;
 	let canSubmit = true;
+	let splashMessage;
 
 	const passwordReset = async () => {
 		canSubmit = false;
@@ -17,7 +20,8 @@
 		});
 
 		if (res.ok) {
-			// TODO сделать модалку с увидомлением
+			splashMessage = "Письмо востановления пароля успешно отправлено"
+			setTimeout(() => goto('/auth/signin'), 5000)
 		} else {
 			error = await res.json();
 		}
@@ -25,6 +29,8 @@
 		canSubmit = true;
 	};
 </script>
+
+<SplashMessage message={splashMessage} type="success" />
 
 <AuthLayout on:submit={passwordReset}>
 	<svelte:fragment slot="h1">Востановление пароля 🔏 <br /> Sia HomeWork</svelte:fragment>

@@ -4,10 +4,12 @@
 	import Input from '$lib/generic/Input.svelte';
 	import AuthLayout from '$lib/layout/AuthLayout.svelte';
 	import Error from '$lib/generic/Error.svelte';
+	import { goto } from '$app/navigation';
 
 	let email;
 	let password;
 	let error;
+	let splashMessage;
 
 	const submitHandler = async () => {
 		const res = await fetch('/api/auth/signup', {
@@ -19,7 +21,7 @@
 		});
 
 		if (res.ok) {
-			//TODO сделать сообщение об успешной регистрации
+			goto('/auth/signin');
 		} else {
 			error = await res.json();
 		}

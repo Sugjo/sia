@@ -1,6 +1,7 @@
 <script>
 	import Button from '$lib/generic/Button.svelte';
 	import { getContext } from 'svelte';
+	import { fly } from 'svelte/transition';
 
 	export let close = true;
 	export let icon = null;
@@ -10,7 +11,8 @@
 	export let variant = 'primary';
 	export let position = 'center';
 
-	let closeHandler = () => (close = !close);
+	let openCloseHandler = () => (close = !close);
+	let closeHandler = () => (close = true);
 
 	let bodyHeight;
 	let bodyWidth;
@@ -25,22 +27,29 @@
 <div class="flyout {positions[position]}{close ? ' closeed' : ''}">
 	<div class="flyout-button">
 		{#if $$slots.button}
-			<Button on:click={closeHandler} {icon} {fluid} {disabled} {outlined} {variant}>
+			<Button on:click={openCloseHandler} {icon} {fluid} {disabled} {outlined} {variant}>
 				<slot name="button" />
 			</Button>
 		{:else}
-			<Button on:click={closeHandler} {icon} {fluid} {disabled} {outlined} {variant} />
+			<Button on:click={openCloseHandler} {icon} {fluid} {disabled} {outlined} {variant} />
 		{/if}
 	</div>
-	<div class="flyout-body" class:close bind:clientHeight={bodyHeight} bind:clientWidth={bodyWidth}>
-		<slot />
-	</div>
-	<div
-		class="flyout-body-overlay"
-		class:close
-		style="height: calc(100% + 0.5rem + {bodyHeight}px) ; width: {bodyWidth}px"
-	/>
-	<div class="flyout-overlay" class:close on:mouseenter={closeHandler} />
+	{#if !close}
+		<div
+			class="flyout-body"
+			in:fly={{ duration: 120, y: -15 }}
+			out:fly={{ duration: 120, y: -10 }}
+			bind:clientHeight={bodyHeight}
+			bind:clientWidth={bodyWidth}
+		>
+			<slot />
+		</div>
+		<div
+			class="flyout-body-overlay"
+			style="height: calc(100% + 0.5rem + {bodyHeight}px) ; width: {bodyWidth}px"
+		/>
+		<div class="flyout-overlay" on:mouseenter={closeHandler} />
+	{/if}
 </div>
 
 <style>
@@ -96,9 +105,5 @@
 
 	.closeed {
 		z-index: 0;
-	}
-
-	.close {
-		display: none;
 	}
 </style>

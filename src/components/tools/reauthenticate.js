@@ -6,10 +6,5 @@ export const reauthenticate = (currentPassword) => {
 
     let cred = EmailAuthProvider.credential(user.email, currentPassword);
     console.log(cred);
-    return reauthenticateWithCredential(cred).then((e) => {
-        console.log('reauth');
-    })
-        .catch((e) => {
-            console.log('error:');
-        });;
+    return reauthenticateWithCredential(user, cred)
 }
