@@ -7,9 +7,9 @@ export async function post({ request }) {
 	const [, error] = await handle(signInWithEmailAndPassword(auth, email, password));
 
 	const errorMessages = {
-		'auth/email-already-in-use': { input: 'email', message: 'Email уже используется' },
 		'auth/invalid-email': { input: 'email', message: 'Введите существующий Email' },
-		'auth/weak-password': { input: 'password', message: 'Пароль слишком простой' }
+		'auth/user-not-found': { input: 'other', message: 'Неверный логин или пароль' },
+		'auth/wrong-password': { input: 'other', message: 'Неверный логин или пароль' }
 	}; //TODO добавить корректные сообщения
 
 	if (error) {

@@ -14,7 +14,17 @@
 	let password;
 
 	const submitHandler = async () => {
-		const [, error] = await handle(signInWithEmailAndPassword(auth, email, password));
+		const res = await fetch('/api/auth/signin', {
+			method: 'POST',
+			body: JSON.stringify({
+				email,
+				password
+			})
+		});
+
+		if (!res.ok) {
+			error = await res.json();
+		}
 	};
 </script>
 
